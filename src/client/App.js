@@ -1,22 +1,36 @@
 import React, { Component } from 'react';
 import './app.css';
-import ReactImage from './react.png';
 
 export default class App extends Component {
-  state = { username: null };
+  state = { 
+    username: null,
+    latitude: 0,
+    longitude: 0
+  };
 
   componentDidMount() {
     fetch('/api/getUsername')
       .then(res => res.json())
       .then(user => this.setState({ username: user.username }));
+
+    navigator.geolocation.getCurrentPosition(this.showPosition);
+  }
+
+  showPosition = (position) => {
+    this.setState({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    })
   }
 
   render() {
-    const { username } = this.state;
+    const { username, latitude, longitude } = this.state;
     return (
       <div>
         {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
+        <h2>
+          {`${latitude}, ${longitude}`}
+        </h2>
       </div>
     );
   }
