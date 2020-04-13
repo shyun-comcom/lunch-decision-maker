@@ -1,36 +1,49 @@
 import React, { Component } from 'react';
+import { KAKAO_MAP_API_KEY } from './constants';
 import './app.css';
 
 export default class App extends Component {
-  state = { 
-    username: null,
-    latitude: 0,
-    longitude: 0
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      latitude: 0,
+      longitude: 0
+    };
+  }
 
   componentDidMount() {
-    fetch('/api/getUsername')
-      .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
+    // async load kakao map api
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_API_KEY}&libraries=services`;
 
-    navigator.geolocation.getCurrentPosition(this.showPosition);
+    console.log(script.src);
+    script.onload = () => this.onScriptLoad();
+    document.head.appendChild(script);
   }
 
-  showPosition = (position) => {
-    this.setState({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
-    })
+  onScriptLoad = () => {
+    // get current geolocation
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      });
+    });
   }
 
-  render() {
-    const { username, latitude, longitude } = this.state;
+  render = () => {
+    const { latitude, longitude } = this.state;
     return (
       <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
+        <h1>Current Location</h1>
         <h2>
-          {`${latitude}, ${longitude}`}
+          { `${latitude}, ${longitude}` }
         </h2>
+        <form>
+          <input type="text" />
+          <input type="submit" value="submit" />
+        </form>
       </div>
     );
   }

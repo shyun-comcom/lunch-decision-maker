@@ -1,0 +1,1 @@
+export const KAKAO_MAP_API_KEY = process.env.KAKAO_MAP_API_KEY;
