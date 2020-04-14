@@ -5,6 +5,7 @@ import './app.css';
 
 export default class App extends Component {
   restaurantList;
+  categoryList;
 
   constructor(props) {
     super(props);
@@ -14,6 +15,7 @@ export default class App extends Component {
       longitude: 0
     };
     this.restaurantList = [];
+    this.categoryList = {};
   }
 
   componentDidMount() {
@@ -43,7 +45,6 @@ export default class App extends Component {
       });
       const { documents } = res.data;
       documents.forEach((elem) => {
-        console.log(elem);
         const category = elem.category_name.split(' > ');
         this.restaurantList.push({
           id: elem.id,
@@ -55,7 +56,9 @@ export default class App extends Component {
           place_url: elem.place_url,
           x: elem.x,
           y: elem.y
-        })
+        });
+        if (this.categoryList[category[1]]) { this.categoryList[category[1]] += 1; }
+        else { this.categoryList[category[1]] = 1; }
       });
     }
     this.setState({isLoaded: true});
@@ -70,10 +73,18 @@ export default class App extends Component {
           { `${latitude}, ${longitude}` }
         </h2>
         { this.state.isLoaded ? 
+          Object.keys(this.categoryList).map((key) => 
+            <div key={key}>
+              {`${key} (${this.categoryList[key]})`}
+            </div>
+          )
+          : null
+        }
+        { this.state.isLoaded ? 
           this.restaurantList.map((elem) => 
             <div key={elem.id} style={{padding: '10px'}}>
               <div style={{fontWeight: 600}}>{elem.place_name}</div>
-              <div>{elem.address_name}</div>
+              <div>{`[${elem.category_name}] ${elem.address_name}`}</div>
             </div>
           )
           : null
