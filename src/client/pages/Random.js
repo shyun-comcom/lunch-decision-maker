@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { REACT_APP_KAKAO_API_KEY } from './constants';
+import { REACT_APP_KAKAO_API_KEY } from '../constants';
+
+import ThinkingEmoji from '../assets/thinking-emoji.png';
 import './app.css';
 
-export default class App extends Component {
+export default class RandomPage extends Component {
   restaurantList;
   categoryList;
 
@@ -66,8 +68,8 @@ export default class App extends Component {
 
   render = () => {
     const { latitude, longitude } = this.state;
-    return (
-      <div>
+    return (this.state.isLoaded ? 
+      <div className="app-root-div">
         <h1>Current Location</h1>
         <h2>
           { `${latitude}, ${longitude}` }
@@ -89,6 +91,15 @@ export default class App extends Component {
           )
           : null
         }
+      </div>
+      :
+      <div className="app-root-div">
+        <div style={{fontSize: '20px', color: '#929292', 
+                fontFamily: 'Noto Sans KR'}}>
+            <div>탐색중..</div>
+            <div>냠냠의 선택은?</div>
+        </div>
+        <img src={ThinkingEmoji} style={{paddingTop: '32px'}} />
       </div>
     );
   }

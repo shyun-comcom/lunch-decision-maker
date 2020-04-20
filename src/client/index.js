@@ -1,5 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import App from './pages/App';
+import HomePage from './pages/Home';
+import RandomPage from './pages/Random';
+
+ReactDOM.render(
+    <Router>
+        <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/home" component={HomePage} />
+            <Route path="/random" component={RandomPage} />
+        </Switch>
+    </Router>,
+    document.getElementById('root'));
