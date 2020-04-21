@@ -29,7 +29,11 @@ export default class TournamentPage extends Component {
             <div>탐색중..</div>
             <div>냠냠의 선택은?</div>
         </div>
-        <img src={ThinkingEmoji} style={{paddingTop: '32px'}} />
+        <div style={{display: 'flex', flexDirection: 'column',
+            alignItems: 'center', justifyContent: 'center',
+            paddingTop: '136px', paddingBottom: '136px'}}>
+          <img src={ThinkingEmoji} />
+        </div>
       </div>
     );
   }

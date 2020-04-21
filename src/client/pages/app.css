@@ -8,7 +8,6 @@ html {
 
 body {
   height: 100%;
-  text-align: center;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -17,11 +16,11 @@ body {
 }
 
 #root {
-  width: 360px;
+  width: 280px;
   height: 640px;
+  padding: 0 40px 0 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   overflow: scroll;
 }
 
@@ -30,24 +29,23 @@ body {
   font-family: Noto Sans KR;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   overflow: scroll;
 }
 
-.start-button {
+.dark-button {
   background-color: #636363;
   color: #ffffff;
   text-align: center;
   cursor: pointer;
 }
-.start-button:hover {
+.dark-button:hover {
   background-color: #3c3c3c;
 }
 
 .home-item-box {
-  width: 280px;
-  height: 248px;
+  width: 278px;
+  height: 246px;
   border: 1px solid #E5E5E5;
   border-radius: 16px;
   flex-direction: column;
@@ -80,4 +78,13 @@ body {
   padding: 8px 0 16px 25px;
   align-items: flex-end;
   justify-content: space-between;
+}
+
+.category-tag {
+  height: 24px;
+  line-height: 24px;
+  border-radius: 16px;
+  padding: 0 13px 0 13px;
+  font-size: 12px;
+  font-weight: bold;
 }

@@ -23,7 +23,7 @@ export default class HomePage extends Component {
             </div>
             <div className="home-item-content">
               <img src={WorldMap} width={88} height={88} />
-              <div className="start-button"
+              <div className="dark-button"
                   onClick={() => this.props.history.push("random")}
                   style={{width: '80px', height: '40px', 
                       borderRadius: '24px', lineHeight: '40px'}}>
@@ -43,7 +43,7 @@ export default class HomePage extends Component {
             </div>
             <div className="home-item-content">
               <img src={WinkEmoji} width={88} height={88} />
-              <div className="start-button"
+              <div className="dark-button"
                   onClick={() => this.props.history.push("tournament")}
                   style={{width: '80px', height: '40px', 
                       borderRadius: '24px', lineHeight: '40px'}}>

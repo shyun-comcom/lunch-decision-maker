@@ -19,14 +19,12 @@ export default class App extends Component {
                     <div>메뉴 결정이 늘 귀찮은</div>
                     <div>고민하는 당신을 냠냠!</div>
                 </div>
-                <div style={{fontSize: '36px', color: '#555555',
+                <div style={{fontSize: '36px', color: '#3D3D3D',
                         fontWeight: 'bold', fontFamily: 'Muli',
-                        paddingTop: '12px'}}>
+                        paddingTop: '12px', paddingBottom: '48px'}}>
                     Nyam Nyam!
                 </div>
-                <img src={YummyEmoji}
-                    style={{paddingTop: '30px', paddingBottom: '49px'}} />
-                <div className='start-button'
+                <div className='dark-button'
                     style={{width: '160px', height: '48px', 
                             borderRadius: '24px', lineHeight: '48px'}}
                     onClick={() => this.props.history.push('home')}>

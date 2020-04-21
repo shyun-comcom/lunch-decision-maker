@@ -16,6 +16,7 @@ export default class RandomPage extends Component {
       isLoaded: false,
       latitude: 0,
       longitude: 0,
+      selected: 0,
       height: 0,
       width: 0
     };
@@ -77,31 +78,37 @@ export default class RandomPage extends Component {
         restList = restList.concat(elem);
       });
 
-      restList.forEach((elem) => {
+      /* restList.forEach((elem) => {
         if (this.categoryList[elem.category_name]) { 
           this.categoryList[elem.category_name] += 1;
         } else {
           this.categoryList[elem.category_name] = 1;
         }
-      });
+      }); */
       this.restaurantList = restList;
+      this.setRandomInfo();
+    });
+  }
 
-      // TODO (seonghwa) : random select
+  setRandomInfo = () => {
+      const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
+      const randomRest = this.restaurantList[randomIdx];
+      const position  = new kakao.maps.LatLng(randomRest.y, randomRest.x); 
 
-      this.setState({isLoaded: true, width: 260, height: 180});
-
+      this.setState({isLoaded: true, width: 280, height: 180, selected: randomIdx});
       var container = document.getElementById('map');
       var options = {
-        center: new kakao.maps.LatLng(latitude, longitude), //지도의 중심좌표.
+        center: position, 
         level: 3 //지도의 레벨(확대, 축소 정도)
       };
 
       var map = new kakao.maps.Map(container, options);
-    });
+      var marker = new kakao.maps.Marker({ position });
+      marker.setMap(map);
   }
 
   render = () => {
-    const { latitude, longitude } = this.state;
+    const selected = this.restaurantList[this.state.selected];
     return ( 
       <div className="app-root-div">
         {this.state.isLoaded ?
@@ -114,22 +121,27 @@ export default class RandomPage extends Component {
         <div style={{width: this.state.width, height: this.state.height,
             borderRadius: 8}} id="map" />
         {this.state.isLoaded ?
-          <div>
-            {
-              Object.keys(this.categoryList).map((key) => 
-                <div key={key}>
-                  {`${key} (${this.categoryList[key]})`}
-                </div>
-              )
-            }
-            {/* 
-              this.restaurantList.map((elem) => 
-                <div key={elem.id} style={{padding: '10px'}}>
-                  <div style={{fontWeight: 600}}>{elem.place_name}</div>
-                  <div>{`[${elem.category_name}] ${elem.address_name}`}</div>
-                </div>
-              )
-            */}
+          <div style={{paddingTop: '32px'}}>
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+              <div className='category-tag' style={{backgroundColor: '#D8E3FF'}}>
+                {selected.category_name}
+              </div>
+              <div style={{paddingLeft: '8px', fontSize: '14px'}}>
+                {selected.place_name}
+              </div>
+            </div>
+            <div style={{color: '#929292', fontSize: '12px',
+                paddingTop: '12px', paddingBottom: '56px'}}>
+              {selected.road_address_name}
+            </div>
+            <div style={{display: 'flex', flexDirection: 'column',
+                alignItems: 'center', justifyContent: 'center'}}>
+              <div className="dark-button"
+                  style={{width: '160px', height: '48px', 
+                      borderRadius: '24px', lineHeight: '48px'}}>
+                {"좋아 👍"}
+              </div>
+            </div>
           </div>
           :
           <div>
@@ -138,7 +150,11 @@ export default class RandomPage extends Component {
                 <div>탐색중..</div>
                 <div>냠냠의 선택은?</div>
             </div>
-              <img src={ThinkingEmoji} style={{paddingTop: '32px'}} />
+            <div style={{display: 'flex', flexDirection: 'column',
+                alignItems: 'center', justifyContent: 'center',
+                paddingTop: '136px', paddingBottom: '136px'}}>
+              <img src={ThinkingEmoji} />
+            </div>
           </div>
         }
       </div>
