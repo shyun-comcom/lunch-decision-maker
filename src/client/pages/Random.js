@@ -110,7 +110,7 @@ export default class RandomPage extends Component {
   render = () => {
     const selected = this.restaurantList[this.state.selected];
     return ( 
-      <div className="app-root-div">
+      <div className="app-root-div" style={{padding: '0 40px 0 40px'}}>
         {this.state.isLoaded ?
           <div style={{fontSize: '20px', fontWeight: 'bold', paddingBottom: '40px'}}>
             <div>냠냠!</div>

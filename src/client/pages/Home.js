@@ -12,7 +12,7 @@ export default class HomePage extends Component {
 
   render = () => {
     return (
-      <div className="app-root-div">
+      <div className="app-root-div" style={{padding: '0 40px 0 40px'}}>
         <div className="home-item-box" id="random">
             <div className="home-item-title">
               니가 정해! 랜덤 메뉴

@@ -13,15 +13,17 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  background: #ffffff;
 }
 
 #root {
-  width: 280px;
+  width: 360px;
   height: 640px;
-  padding: 0 40px 0 40px;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  background: #ffffff;
+  overflow: hidden;
 }
 
 .app-root-div {
@@ -30,7 +32,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .dark-button {
@@ -87,4 +90,14 @@ body {
   padding: 0 13px 0 13px;
   font-size: 12px;
   font-weight: bold;
+}
+
+.circle-div {
+  position: absolute;
+  height: 120px;
+  width: 120px;
+  border-radius: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
