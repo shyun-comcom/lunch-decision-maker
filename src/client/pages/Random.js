@@ -137,6 +137,7 @@ export default class RandomPage extends Component {
             <div style={{display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center'}}>
               <div className="dark-button"
+                  onClick={() => this.props.history.push('confirm')}
                   style={{width: '160px', height: '48px', 
                       borderRadius: '24px', lineHeight: '48px'}}>
                 {"좋아 👍"}

@@ -23,13 +23,14 @@ body {
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .app-root-div {
   flex: 1;
   font-family: Noto Sans KR;
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: center;
   overflow-y: scroll;
@@ -44,6 +45,17 @@ body {
 }
 .dark-button:hover {
   background-color: #3c3c3c;
+}
+
+.white-button {
+  color: #636363;
+  border: 1px solid #DFDFDF;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+}
+.white-button:hover {
+  background-color: #efefef;
 }
 
 .home-item-box {

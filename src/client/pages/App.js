@@ -16,7 +16,7 @@ export default class App extends Component {
     render() {
         return (
             <div className='app-root-div' style={{position: 'relative'}}>
-                <div style={{paddingLeft: '20px'}}>
+                <div style={{paddingLeft: '20px', paddingTop: '56px'}}>
                     <div style={{fontSize: '20px', color: '#3C3C3C', 
                             fontFamily: 'Noto Sans KR'}}>
                         <div>메뉴 결정이 늘 귀찮은</div>
@@ -34,7 +34,9 @@ export default class App extends Component {
                         시작하기
                     </div>
                 </div>
-                <img src={AinizeLogo} style={{paddingTop: '304px'}} />
+                <div style={{flex: 1, display: 'flex', justifyContent: 'center'}}>
+                    <img src={AinizeLogo} style={{paddingTop: '304px'}} />
+                </div>
                 <div className='circle-div' 
                     style={{top: 449, left: -19, background: '#FFF5D0',
                             boxShadow: '0px 2px 16px #FFD43E'}}>
