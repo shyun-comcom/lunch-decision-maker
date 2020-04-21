@@ -1,1 +1,2 @@
-export const REACT_APP_KAKAO_API_KEY = process.env.REACT_APP_KAKAO_API_KEY;
+export const REACT_APP_KAKAO_REST_KEY = process.env.REACT_APP_KAKAO_REST_KEY;
+export const REACT_APP_KAKAO_JS_KEY = process.env.REACT_APP_KAKAO_JS_KEY;

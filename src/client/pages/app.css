@@ -2,20 +2,32 @@ h1 {
   color: green;
 }
 
-html, body { 
+html { 
   height: 100%;
 }
 
 body {
+  height: 100%;
   text-align: center;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 360px;
+  height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: scroll;
 }
 
 .app-root-div {
   flex: 1;
+  font-family: Noto Sans KR;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +38,6 @@ body {
 .start-button {
   background-color: #636363;
   color: #ffffff;
-  font-family: Noto Sans KR;
   text-align: center;
   cursor: pointer;
 }
@@ -39,7 +50,6 @@ body {
   height: 248px;
   border: 1px solid #E5E5E5;
   border-radius: 16px;
-  font-family: Noto Sans KR;
   flex-direction: column;
   display: flex;
   align-items: flex-start;
@@ -60,4 +70,14 @@ body {
   text-align: left;
   padding-left: 25px;
   padding-top: 8px;
+}
+
+.home-item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  width: 232px;
+  padding: 8px 0 16px 25px;
+  align-items: flex-end;
+  justify-content: space-between;
 }
