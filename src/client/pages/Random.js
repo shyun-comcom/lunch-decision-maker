@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
 import ThinkingEmoji from '../assets/thinking-emoji.png';
+import RandomRetry from '../assets/random-retry.png';
 import SalivaEmoji from '../assets/saliva-emoji.png';
 import AddressCopy from '../assets/address-copy.svg';
+import UrlLink from '../assets/url-link.svg';
 import './app.css';
 
 const places = new kakao.maps.services.Places();
+const copy = require('clipboard-copy');
 
 export default class RandomPage extends Component {
   restaurantList;
@@ -134,8 +137,16 @@ export default class RandomPage extends Component {
                 display: 'flex', flexDirection: 'row', alignItems: 'center',
                 paddingTop: '9px', paddingBottom: '53px'}}>
               {selected.road_address_name}
+              <div style={{width: '8px' }} />
               <img src={AddressCopy} width={24} height={24} 
-                  style={{paddingLeft: 8}} />
+                  onClick={() => copy(selected.road_address_name)}
+                  style={{cursor: 'pointer'}} />
+              <div style={{width: '8px' }} />
+              <a target="_blank" href={selected.place_url}
+                  style={{width: '24px', height: '24px', cursor: 'pointer'}}>
+                <img src={UrlLink} width={24} height={24} 
+                    onClick={() => copy(selected.road_address_name)} />
+              </a>
             </div>
             <div style={{display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center'}}>
@@ -143,14 +154,16 @@ export default class RandomPage extends Component {
                   onClick={() => this.props.history.push('confirm')}
                   style={{width: '160px', height: '48px', 
                       borderRadius: '24px', lineHeight: '48px'}}>
-                {"좋아 👍"}
+                좋아!
               </div>
               <div style={{height: '16px'}} />
               <div className='white-button'
                   onClick={() => this.setRandomInfo()}
                   style={{width: '190px', height: '48px', fontSize: '16px',
                           lineHeight: '49px', borderRadius: '24px'}}>
-                  한번 더 랜덤↩️
+                  <div style={{paddingRight: '4px'}}>한번 더 랜덤</div>
+                  <img src={RandomRetry} width={16} height={16} 
+                      style={{verticalAlign: 'middle'}} />
               </div>
             </div>
           </div>
