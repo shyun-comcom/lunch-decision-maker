@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import ThinkingEmoji from '../assets/thinking-emoji.png';
+import SalivaEmoji from '../assets/saliva-emoji.png';
 import './app.css';
 
 const places = new kakao.maps.services.Places();
@@ -78,13 +78,6 @@ export default class RandomPage extends Component {
         restList = restList.concat(elem);
       });
 
-      /* restList.forEach((elem) => {
-        if (this.categoryList[elem.category_name]) { 
-          this.categoryList[elem.category_name] += 1;
-        } else {
-          this.categoryList[elem.category_name] = 1;
-        }
-      }); */
       this.restaurantList = restList;
       this.setRandomInfo();
     });
@@ -112,8 +105,13 @@ export default class RandomPage extends Component {
     return ( 
       <div className="app-root-div" style={{padding: '0 40px 0 40px'}}>
         {this.state.isLoaded ?
-          <div style={{fontSize: '20px', fontWeight: 'bold', paddingBottom: '40px'}}>
-            <div>냠냠!</div>
+          <div style={{fontSize: '20px', fontWeight: 'bold',
+              paddingBottom: '40px', paddingTop: '56px'}}>
+            <div style={{display: 'flex', flexDirection: 'row',
+                alignItems: 'center', height: 24, lineHeight: 24}}>
+              냠냠!
+              <img src={SalivaEmoji} style={{widht: '24px', height: '24px'}} />
+            </div>
             <div>식당도 알려줄께! 어때?</div>
           </div>
           : null
@@ -142,10 +140,17 @@ export default class RandomPage extends Component {
                       borderRadius: '24px', lineHeight: '48px'}}>
                 {"좋아 👍"}
               </div>
+              <div style={{height: '16px'}} />
+              <div className='white-button'
+                  onClick={() => this.setRandomInfo()}
+                  style={{width: '190px', height: '48px', fontSize: '16px',
+                          lineHeight: '49px', borderRadius: '24px'}}>
+                  한번 더 랜덤↩️
+              </div>
             </div>
           </div>
           :
-          <div>
+          <div style={{paddingTop: '56px'}}>
             <div style={{fontSize: '20px', color: '#929292', 
                     fontFamily: 'Noto Sans KR'}}>
                 <div>탐색중..</div>

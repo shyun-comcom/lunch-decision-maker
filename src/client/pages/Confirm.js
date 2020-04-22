@@ -54,7 +54,7 @@ export default class ConfirmPage extends Component {
                 </div>
                 <div style={{flex: 1, flexDirection: 'column', background: '#f2f2f2',
                         display: 'flex', alignItems: 'center', padding: '32px 0 32px 0'}}>
-                    <img src={AinizeLogo} />
+                    <img src={AinizeLogo} style={{width: 106, height: 35}} />
                 </div>
             </div>
         )
