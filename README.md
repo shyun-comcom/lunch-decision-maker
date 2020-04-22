@@ -1,4 +1,4 @@
-# ainize-with-react-nodejs 
+# lunch-decision-maker (Nyam Nyam!) 
 
 ## Reference
 [simple-react-full-stack](https://github.com/crsandeep/simple-react-full-stack)

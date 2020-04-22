@@ -74,21 +74,21 @@ body {
   align-items: flex-start;
 }
 
-.home-item-title {
-  color: #3c3c3c;
-  font-size: 20px;
-  font-weight: bold;
-  padding-top: 24px;
-  padding-left: 25px;
-}
-
 .home-item-desc {
   font-weight: normal;
   font-size: 14px;
   color: #929292;
   text-align: left;
   padding-left: 25px;
-  padding-top: 8px;
+  padding-top: 24px;
+}
+
+.home-item-title {
+  color: #3c3c3c;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 25px;
+  padding-top: 16px;
 }
 
 .home-item-content {

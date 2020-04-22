@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import ThinkingEmoji from '../assets/thinking-emoji.png';
 import SalivaEmoji from '../assets/saliva-emoji.png';
+import AddressCopy from '../assets/address-copy.svg';
 import './app.css';
 
 const places = new kakao.maps.services.Places();
@@ -109,10 +110,11 @@ export default class RandomPage extends Component {
               paddingBottom: '40px', paddingTop: '56px'}}>
             <div style={{display: 'flex', flexDirection: 'row',
                 alignItems: 'center', height: 24, lineHeight: 24}}>
-              냠냠!
-              <img src={SalivaEmoji} style={{widht: '24px', height: '24px'}} />
+              냠냠의 추천!
+              <img src={SalivaEmoji} width={24} height={24}
+                  style={{paddingLeft: 7}} />
             </div>
-            <div>식당도 알려줄께! 어때?</div>
+            <div>오늘의 메뉴와 식당, 어때?</div>
           </div>
           : null
         }
@@ -128,9 +130,12 @@ export default class RandomPage extends Component {
                 {selected.place_name}
               </div>
             </div>
-            <div style={{color: '#929292', fontSize: '12px',
-                paddingTop: '12px', paddingBottom: '56px'}}>
+            <div style={{color: '#929292', fontSize: '12px', height: 24,
+                display: 'flex', flexDirection: 'row', alignItems: 'center',
+                paddingTop: '9px', paddingBottom: '53px'}}>
               {selected.road_address_name}
+              <img src={AddressCopy} width={24} height={24} 
+                  style={{paddingLeft: 8}} />
             </div>
             <div style={{display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center'}}>

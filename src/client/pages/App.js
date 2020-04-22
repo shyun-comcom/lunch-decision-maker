@@ -19,8 +19,8 @@ export default class App extends Component {
                 <div style={{paddingLeft: '20px', paddingTop: '56px'}}>
                     <div style={{fontSize: '20px', color: '#3C3C3C', 
                             fontFamily: 'Noto Sans KR'}}>
-                        <div>메뉴 결정이 늘 귀찮은</div>
-                        <div>당신을 위한 냠냠!</div>
+                        <div>메뉴 결정부터 식당 추천까지,</div>
+                        <div>냠냠 하나면 돼!</div>
                     </div>
                     <div style={{fontSize: '36px', color: '#3D3D3D',
                             fontWeight: 'bold', fontFamily: 'Muli Bold',
