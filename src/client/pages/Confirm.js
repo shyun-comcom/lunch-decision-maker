@@ -3,6 +3,8 @@ import { observer } from 'mobx-react';
 
 import AinizeLogo from '../assets/ainize-logo.svg';
 import SalivaEmoji from '../assets/saliva-emoji.png';
+import FacebookIcon from '../assets/facebook-icon.svg';
+import GithubIcon from '../assets/github-icon.svg';
 import './app.css';
 
 @observer
@@ -31,19 +33,21 @@ export default class ConfirmPage extends Component {
                     </div>
                     <div className='white-button'
                         style={{width: '248px', height: '48px', fontSize: '16px',
-                                lineHeight: '48px', borderRadius: '24px'}}>
-                        좋아해주기
+                                lineHeight: '49px', borderRadius: '24px'}}>
+                        <div style={{paddingRight: '4px'}}>좋아해주기</div>
+                        <img style={{verticalAlign: 'middle'}} src={FacebookIcon} />
                     </div>
                     <div style={{height: '16px'}} />
                     <div className='white-button'
                         style={{width: '248px', height: '48px', fontSize: '16px',
-                                lineHeight: '48px', borderRadius: '24px'}}>
-                        냠냠 프로젝트 보기
+                                lineHeight: '49px', borderRadius: '24px'}}>
+                        <div style={{paddingRight: '4px'}}>냠냠 프로젝트 보기</div>
+                        <img style={{verticalAlign: 'middle'}} src={GithubIcon} />
                     </div>
                     <div style={{height: '16px'}} />
                     <div className='white-button'
                         style={{width: '248px', height: '48px', fontSize: '16px',
-                                lineHeight: '48px', borderRadius: '24px'}}>
+                                lineHeight: '49px', borderRadius: '24px'}}>
                         처음으로 돌아가기
                     </div>
                     <div style={{height: '48px'}} />

@@ -53,6 +53,12 @@ body {
   box-sizing: border-box;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-weight: normal;
 }
 .white-button:hover {
   background-color: #efefef;
