@@ -2,9 +2,45 @@ import React, { Component } from 'react';
 
 import ThinkingEmoji from '../assets/thinking-emoji.png';
 import WinkEmoji from '../assets/wink-emoji.png';
+import SalivaEmoji from '../assets/saliva-emoji.png';
 import './app.css';
 
+import DumplingIcon from '../assets/dumpling-icon.png';
+import RiceIcon from '../assets/rise-icon.png';
+import ChickenIcon from '../assets/chicken-icon.png';
+import BurgerIcon from '../assets/burger-icon.png';
+import SushiIcon from '../assets/sushi-icon.png';
+import OctopusIcon from '../assets/octopus-icon.png';
+import PizzaIcon from '../assets/pizza-icon.png';
+import DosirakIcon from '../assets/dosirak-icon.png';
+import TacoIcon from '../assets/taco-icon.png';
+import BunsikIcon from '../assets/bunsik-icon.png';
+import JookIcon from '../assets/jook-icon.png';
+import SaladIcon from '../assets/salad-icon.png';
+import SandwichIcon from '../assets/sandwich-icon.png';
+import WesternIcon from '../assets/western-icon.png';
+import AsianIcon from '../assets/asian-icon.png';
+
 const places = new kakao.maps.services.Places();
+
+const food_category = [
+  { id: 'korean', name: '한식', color: '#D8E3FF', icon: RiceIcon },
+  { id: 'burger', name: '버거', color: '#FFE6C0', icon: BurgerIcon },
+  { id: 'chinese', name: '중식', color: '#FFF5D0', icon: DumplingIcon },
+  { id: 'japanese', name: '일식', color: '#FFE3DA', icon: SushiIcon },
+  { id: 'seafood', name: '해산물', color: '#FFE3DA', icon: OctopusIcon },
+  { id: 'chicken', name: '치킨', color: '#FFE6C0', icon: ChickenIcon },
+  { id: 'pizza', name: '피자', color: '#FFF5D0', icon: PizzaIcon },
+  { id: 'dosirak', name: '도시락', color: '#FFE3DA', icon: DosirakIcon },
+  { id: 'mexican', name: '멕시칸', color: '#FFE6C0', icon: TacoIcon },
+  { id: 'bunsik', name: '분식', color: '#FFF5D0', icon: BunsikIcon },
+  { id: 'bakery', name: '베이커리', color: '#D8E3FF', icon: BakeryIcon },
+  { id: 'jook', name: '죽', color: '#FFE6C0', icon: JookIcon },
+  { id: 'salad', name: '샐러드', color: '#D8E3FF', icon : SaladIcon },
+  { id: 'sandwich', name: '샌드위치', color: '#FFF5D0', icon : SandwichIcon },
+  { id: 'western', name: '양식', color: '#FFE3DA', icon : WesternIcon },
+  { id: 'asian', name: '아시안', color: '#D8E3FF', icon : AsianIcon },
+];
 
 export default class TournamentPage extends Component {
   restaurantList;
@@ -15,7 +51,8 @@ export default class TournamentPage extends Component {
     this.state = {
       isLoaded: false,
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      isFinished: false
     };
     this.restaurantList = [];
     this.categoryList = {};
@@ -33,7 +70,7 @@ export default class TournamentPage extends Component {
 
   categorySearchPromise = (latitude, longitude, page) => {
     return new Promise((resolve, reject) => {
-      places.categorySearch('FD6', (result, status) => {
+      places.keywordSearch('도시락', (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           const resList = [];
           result.forEach((elem) => {
@@ -55,6 +92,7 @@ export default class TournamentPage extends Component {
           resolve([]);
         }
       }, {
+          category_group_code: 'FD6',
           x: longitude,
           y: latitude,
           radius: 1000,
@@ -92,25 +130,39 @@ export default class TournamentPage extends Component {
     return (
       <div className="app-root-div" style={{padding: '0 40px 0 40px'}}>
         {this.state.isLoaded ? 
-          <div style={{paddingTop: '56px'}}>
-            <div style={{fontSize: '20px', fontWeight: 'bold',
-                paddingBottom: '40px', paddingTop: '56px'}}>
-              <div>메뉴 월드컵!</div>
-              <div style={{display: 'flex', flexDirection: 'row',
-                  alignItems: 'center', height: 24, lineHeight: 24}}>
-                오늘의 취향은?
-                <img src={WinkEmoji} width={24} height={24} 
-                    style={{paddingLeft: 7}} />
+          this.state.isFinished ? 
+            <div style={{paddingTop: '56px'}}>
+              <div style={{fontSize: '20px', fontWeight: 'bold',
+                  paddingBottom: '40px', paddingTop: '56px'}}>
+                <div>메뉴 월드컵!</div>
+                <div style={{display: 'flex', flexDirection: 'row',
+                    alignItems: 'center', height: 24, lineHeight: 24}}>
+                  오늘의 취향은?
+                  <img src={SalivaEmoji} width={24} height={24} 
+                      style={{paddingLeft: 7}} />
+                </div>
               </div>
             </div>
-            <div>
-              {Object.keys(this.categoryList).map((key) => 
-                <div key={key} style={{fontSize: '12px'}}>
-                  {`[${key}] ${this.categoryList[key]}`}
+            :
+            <div style={{paddingTop: '56px'}}>
+              <div style={{fontSize: '20px', fontWeight: 'bold',
+                  paddingBottom: '40px', paddingTop: '56px'}}>
+                <div>메뉴 월드컵!</div>
+                <div style={{display: 'flex', flexDirection: 'row',
+                    alignItems: 'center', height: 24, lineHeight: 24}}>
+                  오늘의 취향은?
+                  <img src={WinkEmoji} width={24} height={24} 
+                      style={{paddingLeft: 7}} />
                 </div>
-              )}
+              </div>
+              <div>
+                {Object.keys(this.categoryList).map((key) => 
+                  <div key={key} style={{fontSize: '12px'}}>
+                    {`[${key}] ${this.categoryList[key]}`}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
           :
           <div style={{paddingTop: '56px'}}>
             <div style={{fontSize: '20px', color: '#929292', 
