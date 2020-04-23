@@ -7,10 +7,10 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/shyun-comcom/ainize-with-react-nodejs
+git clone https://github.com/shyun-comcom/lunch-decision-maker
 
 # Go inside the directory
-cd ainize-with-react-nodejs
+cd lunch-decision-maker 
 
 # Install dependencies
 yarn (or npm install)
