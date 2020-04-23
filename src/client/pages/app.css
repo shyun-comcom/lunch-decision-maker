@@ -49,6 +49,7 @@ body {
 
 .white-button {
   color: #636363;
+  background-color: #ffffff;
   border: 1px solid #DFDFDF;
   box-sizing: border-box;
   text-align: center;
@@ -59,6 +60,7 @@ body {
   justify-content: center;
   font-style: normal;
   font-weight: normal;
+  text-decoration: none;
 }
 .white-button:hover {
   background-color: #efefef;
