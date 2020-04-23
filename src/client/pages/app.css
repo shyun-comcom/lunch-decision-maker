@@ -121,3 +121,34 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.tournament-card {
+  width: 248px;
+  height: 182px;
+  border-radius: 24px;
+  position: relative;
+  cursor: pointer;
+}
+.tournament-card:hover {
+  opacity: 0.5;
+}
+
+.centered-vs {
+  position: absolute;
+  height: 54px;
+  line-height: 54px;
+  width: 54px;
+  border-radius: 27px;
+  left: 50%;
+  margin-left: -26px;
+  top: 50%;
+  margin-top: -26px;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.16);
+  color: #3c3c3c;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
