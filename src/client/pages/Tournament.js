@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
+import KakaoMap from '../components/KakaoMap';
 
 import WinkEmoji from '../assets/wink-emoji.png';
 import SalivaEmoji from '../assets/saliva-emoji.png';
