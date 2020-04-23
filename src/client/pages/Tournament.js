@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
-import ThinkingEmoji from '../assets/thinking-emoji.png';
+import Footer from '../components/Footer';
+import Loading from '../components/Loading';
+import KakaoMap from '../components/KakaoMap';
+
 import WinkEmoji from '../assets/wink-emoji.png';
 import SalivaEmoji from '../assets/saliva-emoji.png';
 import './app.css';
 
 import DumplingIcon from '../assets/dumpling-icon.png';
-import RiceIcon from '../assets/rise-icon.png';
+import RiceIcon from '../assets/rice-icon.png';
 import ChickenIcon from '../assets/chicken-icon.png';
 import BurgerIcon from '../assets/burger-icon.png';
 import SushiIcon from '../assets/sushi-icon.png';
@@ -18,6 +21,7 @@ import BunsikIcon from '../assets/bunsik-icon.png';
 import JookIcon from '../assets/jook-icon.png';
 import SaladIcon from '../assets/salad-icon.png';
 import SandwichIcon from '../assets/sandwich-icon.png';
+import BakeryIcon from '../assets/bakery-icon.png';
 import WesternIcon from '../assets/western-icon.png';
 import AsianIcon from '../assets/asian-icon.png';
 
@@ -128,16 +132,16 @@ export default class TournamentPage extends Component {
   render = () => {
     const { latitude, longitude } = this.state;
     return (
-      <div className="app-root-div" style={{padding: '0 40px 0 40px'}}>
+      <div className="app-root-div">
         {this.state.isLoaded ? 
           this.state.isFinished ? 
             <div style={{paddingTop: '56px'}}>
               <div style={{fontSize: '20px', fontWeight: 'bold',
                   paddingBottom: '40px', paddingTop: '56px'}}>
-                <div>메뉴 월드컵!</div>
+                <div>오예!</div>
                 <div style={{display: 'flex', flexDirection: 'row',
                     alignItems: 'center', height: 24, lineHeight: 24}}>
-                  오늘의 취향은?
+                  오늘의 우승 메뉴
                   <img src={SalivaEmoji} width={24} height={24} 
                       style={{paddingLeft: 7}} />
                 </div>
@@ -163,19 +167,7 @@ export default class TournamentPage extends Component {
                 )}
               </div>
             </div>
-          :
-          <div style={{paddingTop: '56px'}}>
-            <div style={{fontSize: '20px', color: '#929292', 
-                    fontFamily: 'Noto Sans KR'}}>
-                <div>탐색중..</div>
-                <div>냠냠의 선택은?</div>
-            </div>
-            <div style={{display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center',
-                paddingTop: '136px', paddingBottom: '136px'}}>
-              <img src={ThinkingEmoji} />
-            </div>
-          </div>
+          : <Loading />
         }
       </div>
     );

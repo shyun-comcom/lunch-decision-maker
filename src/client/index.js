@@ -6,7 +6,6 @@ import App from './pages/App';
 import HomePage from './pages/Home';
 import RandomPage from './pages/Random';
 import TournamentPage from './pages/Tournament';
-import ConfirmPage from './pages/Confirm';
 
 ReactDOM.render(
     <Router>
@@ -15,7 +14,6 @@ ReactDOM.render(
             <Route path="/home" component={HomePage} />
             <Route path="/random" component={RandomPage} />
             <Route path="/tournament" component={TournamentPage} />
-            <Route path="/confirm" component={ConfirmPage} />
         </Switch>
     </Router>,
     document.getElementById('root'));

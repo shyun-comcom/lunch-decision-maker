@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
-import ThinkingEmoji from '../assets/thinking-emoji.png';
+import Footer from '../components/Footer';
+import Loading from '../components/Loading';
+import KakaoMap from '../components/KakaoMap';
+
 import RandomRetry from '../assets/random-retry.png';
 import SalivaEmoji from '../assets/saliva-emoji.png';
 import AddressCopy from '../assets/address-copy.svg';
@@ -107,25 +110,21 @@ export default class RandomPage extends Component {
   render = () => {
     const selected = this.restaurantList[this.state.selected];
     return ( 
-      <div className="app-root-div" style={{padding: '0 40px 0 40px'}}>
+      <div className="app-root-div">
         {this.state.isLoaded ?
-          <div style={{fontSize: '20px', fontWeight: 'bold',
-              paddingBottom: '40px', paddingTop: '56px'}}>
-            <div style={{display: 'flex', flexDirection: 'row',
-                alignItems: 'center', height: 24, lineHeight: 24}}>
-              냠냠의 추천!
-              <img src={SalivaEmoji} width={24} height={24}
-                  style={{paddingLeft: 7}} />
+          <div style={{padding: '56px 40px 40px 40px'}}>
+            <div style={{paddingBottom: '40px'}}>
+              <div style={{display: 'flex', flexDirection: 'row',
+                  alignItems: 'center', height: 24, lineHeight: 24}}>
+                냠냠의 추천!
+                <img src={SalivaEmoji} width={24} height={24}
+                    style={{paddingLeft: 7}} />
+              </div>
+              <div>오늘의 메뉴와 식당, 어때?</div>
             </div>
-            <div>오늘의 메뉴와 식당, 어때?</div>
-          </div>
-          : null
-        }
-        <div style={{width: this.state.width, height: this.state.height,
-            borderRadius: 8}} id="map" />
-        {this.state.isLoaded ?
-          <div style={{paddingTop: '32px'}}>
-            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+            <KakaoMap lat={this.state.latitude} lng={this.state.longitude} />
+            <div style={{display: 'flex', flexDirection: 'row',
+                alignItems: 'center', paddingTop: '32px'}}>
               <div className='category-tag' style={{backgroundColor: '#D8E3FF'}}>
                 {selected.category_name}
               </div>
@@ -144,17 +143,16 @@ export default class RandomPage extends Component {
               <div style={{width: '8px' }} />
               <a target="_blank" href={selected.place_url}
                   style={{width: '24px', height: '24px', cursor: 'pointer'}}>
-                <img src={UrlLink} width={24} height={24} 
-                    onClick={() => copy(selected.road_address_name)} />
+                <img src={UrlLink} width={24} height={24} />
               </a>
             </div>
             <div style={{display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center'}}>
-              <div className="dark-button"
+                alignItems: 'center', justifyContent: 'center', paddingBottom: 64}}>
+              <div className="white-button"
                   onClick={() => this.props.history.push('confirm')}
-                  style={{width: '160px', height: '48px', 
+                  style={{width: '200px', height: '48px', 
                       borderRadius: '24px', lineHeight: '48px'}}>
-                좋아!
+                결과 링크 공유하기
               </div>
               <div style={{height: '16px'}} />
               <div className='white-button'
@@ -166,20 +164,9 @@ export default class RandomPage extends Component {
                       style={{verticalAlign: 'middle'}} />
               </div>
             </div>
+            <Footer />
           </div>
-          :
-          <div style={{paddingTop: '56px'}}>
-            <div style={{fontSize: '20px', color: '#929292', 
-                    fontFamily: 'Noto Sans KR'}}>
-                <div>탐색중..</div>
-                <div>냠냠의 선택은?</div>
-            </div>
-            <div style={{display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center',
-                paddingTop: '136px', paddingBottom: '136px'}}>
-              <img src={ThinkingEmoji} />
-            </div>
-          </div>
+          : <Loading />
         }
       </div>
     );
