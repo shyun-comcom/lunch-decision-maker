@@ -152,3 +152,10 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.ainize-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

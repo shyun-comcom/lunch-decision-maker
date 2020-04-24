@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getNearRestaurantList } from '../utils';
 
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
@@ -95,77 +96,31 @@ export default class TournamentPage extends Component {
     });
   }
 
-  categorySearchPromise = (latitude, longitude, page, keyword) => {
-    return new Promise((resolve, reject) => {
-      places.keywordSearch(keyword, (result, status) => {
-        if (status === kakao.maps.services.Status.OK) {
-          const resList = [];
-          result.forEach((elem) => {
-            const category = elem.category_name.split(' > ');
-            resList.push({
-              id: elem.id,
-              address_name: elem.address_name,
-              road_address_name: elem.road_address_name,
-              category_name: category[1],
-              distance: elem.distance,
-              place_name: elem.place_name,
-              place_url: elem.place_url,
-              x: elem.x,
-              y: elem.y
-            });
-          });
-          resolve(resList);
-        } else {
-          resolve([]);
-        }
-      }, {
-          category_group_code: 'FD6',
-          x: longitude,
-          y: latitude,
-          radius: 1000,
-          page
-      });
-    })
+  setRandomInfo = async (latitude, longitude, cate) => {
+    const restList = await getNearRestaurantList(
+        latitude, longitude, food_category[cate].name
+      );
+    this.restaurantList = restList;
+    const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
+    const randomRest = this.restaurantList[randomIdx];
+    const position  = new kakao.maps.LatLng(randomRest.y, randomRest.x); 
+
+    this.setState({isFinished: true, selected: randomIdx, winnerCate: cate});
+    var container = document.getElementById('map');
+    var options = {
+      center: position, 
+      level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options);
+    var marker = new kakao.maps.Marker({ position });
+    marker.setMap(map);
   }
 
-  getNearRestaurantList = async (latitude, longitude, keyword) => {
-    const promises = [];
-    for (var page = 1; page <= 3; page++) {
-      promises.push(this.categorySearchPromise(latitude, longitude, page, keyword));
-    }
-
-    Promise.all(promises).then(async (res) => {
-      var restList = [];
-      res.forEach((elem) => {
-        restList = restList.concat(elem);
-      });
-      this.restaurantList = restList;
-      this.setRandomInfo();
-    });
-  }
-
-  setRandomInfo = () => {
-      const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
-      const randomRest = this.restaurantList[randomIdx];
-      const position  = new kakao.maps.LatLng(randomRest.y, randomRest.x); 
-
-      this.setState({isFinished: true, selected: randomIdx});
-      var container = document.getElementById('map');
-      var options = {
-        center: position, 
-        level: 3 //지도의 레벨(확대, 축소 정도)
-      };
-
-      var map = new kakao.maps.Map(container, options);
-      var marker = new kakao.maps.Marker({ position });
-      marker.setMap(map);
-  }
-
-  selectOne = (cate) => {
+  selectOne = async (cate) => {
     if (this.state.comp === 28) { // finally pick
       const { latitude, longitude } = this.state;
-      this.getNearRestaurantList(latitude, longitude, food_category[cate].name);
-      this.setState({winnerCate: cate});
+      this.setRandomInfo(latitude, longitude, cate);
     } else {
       this.matchList.push(cate);
       this.setState({comp: this.state.comp + 2})
@@ -266,7 +221,6 @@ export default class TournamentPage extends Component {
                 <div style={{display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', paddingBottom: 64}}>
                   <div className="white-button"
-                      onClick={() => this.props.history.push('confirm')}
                       style={{width: '200px', height: '48px', 
                           borderRadius: '24px', lineHeight: '48px'}}>
                     결과 링크 공유하기

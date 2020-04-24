@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getNearRestaurantList } from '../utils';
 
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
@@ -37,60 +38,13 @@ export default class RandomPage extends Component {
       this.setState({
         latitude, longitude
       });
-      this.getNearRestaurantList(latitude, longitude);
+      this.setRandomInfo(latitude, longitude);
     });
   }
 
-  categorySearchPromise = (latitude, longitude, page) => {
-    return new Promise((resolve, reject) => {
-      places.categorySearch('FD6', (result, status) => {
-        if (status === kakao.maps.services.Status.OK) {
-          const resList = [];
-          result.forEach((elem) => {
-            const category = elem.category_name.split(' > ');
-            resList.push({
-              id: elem.id,
-              address_name: elem.address_name,
-              road_address_name: elem.road_address_name,
-              category_name: category[1],
-              distance: elem.distance,
-              place_name: elem.place_name,
-              place_url: elem.place_url,
-              x: elem.x,
-              y: elem.y
-            });
-          });
-          resolve(resList);
-        } else {
-          resolve([]);
-        }
-      }, {
-          x: longitude,
-          y: latitude,
-          radius: 1000,
-          page
-      });
-    })
-  }
-
-  getNearRestaurantList = async (latitude, longitude) => {
-    const promises = [];
-    for (var page = 1; page <= 3; page++) {
-      promises.push(this.categorySearchPromise(latitude, longitude, page));
-    }
-
-    Promise.all(promises).then(async (res) => {
-      var restList = [];
-      res.forEach((elem) => {
-        restList = restList.concat(elem);
-      });
-
+  setRandomInfo = async (latitude, longitude) => {
+      const restList = await getNearRestaurantList(latitude, longitude);
       this.restaurantList = restList;
-      this.setRandomInfo();
-    });
-  }
-
-  setRandomInfo = () => {
       const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
       const randomRest = this.restaurantList[randomIdx];
       const position  = new kakao.maps.LatLng(randomRest.y, randomRest.x); 
@@ -108,6 +62,7 @@ export default class RandomPage extends Component {
   }
 
   render = () => {
+    const { latitude, longitude } = this.state;
     const selected = this.restaurantList[this.state.selected];
     return ( 
       <div className="app-root-div">
@@ -150,14 +105,13 @@ export default class RandomPage extends Component {
               <div style={{display: 'flex', flexDirection: 'column',
                   alignItems: 'center', justifyContent: 'center', paddingBottom: 64}}>
                 <div className="white-button"
-                    onClick={() => this.props.history.push('confirm')}
                     style={{width: '200px', height: '48px', 
                         borderRadius: '24px', lineHeight: '48px'}}>
                   결과 링크 공유하기
                 </div>
                 <div style={{height: '16px'}} />
                 <div className='white-button'
-                    onClick={() => this.setRandomInfo()}
+                    onClick={() => this.setRandomInfo(latitude, longitude)}
                     style={{width: '190px', height: '48px', fontSize: '16px',
                             lineHeight: '49px', borderRadius: '24px'}}>
                     <div style={{paddingRight: '4px'}}>한번 더 랜덤</div>
