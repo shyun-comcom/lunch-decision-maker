@@ -10,6 +10,7 @@ import SalivaEmoji from '../assets/saliva-emoji.png';
 import RandomRetry from '../assets/random-retry.png';
 import AddressCopy from '../assets/address-copy.svg';
 import UrlLink from '../assets/url-link.svg';
+import TournamentVS from '../assets/tournament-vs.svg';
 import './app.css';
 
 import DumplingIcon from '../assets/dumpling-icon.png';
@@ -155,7 +156,7 @@ export default class TournamentPage extends Component {
                 position: 'absolute', right: 32, bottom: 24}} />
       </div>
       <div className="centered-vs">
-        VS
+        <img src={TournamentVS} />
       </div>
     </div>)
   }
