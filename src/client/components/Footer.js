@@ -58,7 +58,8 @@ class Footer extends Component {
                     다른 Ainize 프로젝트 보기
                 </div>
                 <div style={{height: '32px'}} />
-                <div className="ainize-item">
+                <a className="ainize-item" target="_blank"
+                    href="https://www.youtube.com/watch?v=Q2Lp0CmxOzc">
                     <img src={AinizeCorona} 
                         style={{width: 248, height: 140, borderRadius: 16}} />
                     <div style={{height: 16}} />
@@ -72,9 +73,10 @@ class Footer extends Component {
                     <div style={{fontSize: 12, color: '#929292'}}>
                         #신종코로나 #코로나맵 #개발자
                     </div>
-                </div>
+                </a>
                 <div style={{height: '40px'}} />
-                <div className="ainize-item">
+                <a className="ainize-item" target="_blank"
+                    href="https://www.youtube.com/watch?v=Gei0nxVqbOo&t=13s">
                     <img src={AinizeDeoldify} 
                         style={{width: 248, height: 140, borderRadius: 16}} />
                     <div style={{height: 16}} />
@@ -85,7 +87,7 @@ class Footer extends Component {
                     <div style={{fontSize: 12, color: '#929292'}}>
                         #deoldify #흑백사진 #컬러복원
                     </div>
-                </div>
+                </a>
                 <div style={{height: '40px'}} />
                 <img src={AinizeLogo} style={{width: 106, height: 35}} />
             </div>
