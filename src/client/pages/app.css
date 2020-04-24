@@ -1,9 +1,6 @@
-h1 {
-  color: green;
-}
-
 html { 
   height: 100%;
+  -webkit-user-select: none
 }
 
 body {

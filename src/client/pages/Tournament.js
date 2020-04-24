@@ -161,6 +161,19 @@ export default class TournamentPage extends Component {
     </div>)
   }
 
+  getRoundString = () => {
+    const { comp } = this.state;
+    if (comp < 16) { 
+      return `${comp / 2 + 1} / 8`;
+    } else if (comp < 24) {
+      return `${(comp - 16) / 2 + 1} / 4`;
+    } else if (comp < 28) {
+      return `${(comp - 24) / 2 + 1} / 2`;
+    } else {
+      return '결승';
+    }
+  }
+
   render = () => {
     const selected = this.restaurantList[this.state.selected];
     return (
@@ -245,13 +258,23 @@ export default class TournamentPage extends Component {
             :
             <div style={{padding: '56px 40px 40px 40px'}}>
               <div style={{fontSize: '20px', fontWeight: 'bold',
-                  paddingBottom: '40px'}}>
-                <div>메뉴 월드컵!</div>
-                <div style={{display: 'flex', flexDirection: 'row',
-                    alignItems: 'center', height: 24, lineHeight: 24}}>
-                  오늘의 취향은?
-                  <img src={WinkEmoji} width={24} height={24} 
-                      style={{paddingLeft: 7}} />
+                  paddingBottom: '40px', display: 'flex', flexDirection: 'row',
+                  justifyContent: 'space-between', alignItems: 'flex-end'}}>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                  <div>메뉴 월드컵!</div>
+                  <div style={{display: 'flex', flexDirection: 'row',
+                      alignItems: 'center', height: 24, lineHeight: 24}}>
+                    오늘의 취향은?
+                    <img src={WinkEmoji} width={24} height={24} 
+                        style={{paddingLeft: 7}} />
+                  </div>
+                  <div style={{height: 8}} />
+                </div>
+                <div style={{height: 40, padding: '0 22px', background: '#EAEAEA',
+                    lineHeight: 40, borderRadius: 24, display: 'flex',
+                    justifyContent: 'center', alignItems: 'center',
+                    fontSize: '16px', fontWeight: 'bold', color: '#929292'}}>
+                  {this.getRoundString()}
                 </div>
               </div>
               <div style={{display: 'flex', flexDirection: 'column',
