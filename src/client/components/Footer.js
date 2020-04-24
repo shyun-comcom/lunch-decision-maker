@@ -5,8 +5,8 @@ import AinizeCorona from '../assets/ainize-corona.png';
 import AinizeDeoldify from '../assets/ainize-deoldify.png';
 import AinizeLogo from '../assets/ainize-logo.svg';
 import SalivaEmoji from '../assets/saliva-emoji.png';
-import FacebookIcon from '../assets/facebook-icon.svg';
 import YoutubeIcon from '../assets/youtube-icon.svg';
+import AinizeIcon from '../assets/ainize-icon.svg';
 import GithubIcon from '../assets/github-icon.svg';
 import '../pages/app.css';
 
@@ -37,6 +37,14 @@ class Footer extends Component {
                             lineHeight: '48px', borderRadius: '24px'}}>
                     <div style={{paddingRight: '4px', paddingBottom: '3px'}}>좋아해주기</div>
                     <img style={{verticalAlign: 'middle'}} src={YoutubeIcon} />
+                </a>
+                <div style={{height: '16px'}} />
+                <a className='white-button' target="_blank"
+                    href={"https://www.ainize.ai/"}
+                    style={{width: '248px', height: '48px', fontSize: '16px',
+                            lineHeight: '49px', borderRadius: '24px'}}>
+                    <div style={{paddingRight: '4px'}}>Ainize 더 알아보기</div>
+                    <img style={{verticalAlign: 'middle'}} src={AinizeIcon} />
                 </a>
                 <div style={{height: '16px'}} />
                 <a className='white-button' target="_blank"
