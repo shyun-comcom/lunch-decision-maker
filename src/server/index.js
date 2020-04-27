@@ -3,6 +3,9 @@ const path = require('path');
 
 const app = express();
 
+app.use("/healthz", function(req, res) {
+  res.sendStatus(200);
+});
 app.use(express.static('dist'));
 app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
