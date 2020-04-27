@@ -6,7 +6,7 @@ import Loading from '../components/Loading';
 import KakaoMap from '../components/KakaoMap';
 
 import WinkEmoji from '../assets/wink-emoji.png';
-import SalivaEmoji from '../assets/saliva-emoji.png';
+import CelebrateEmoji from '../assets/celebrate-emoji.png';
 import RandomRetry from '../assets/random-retry.png';
 import AddressCopy from '../assets/address-copy.svg';
 import UrlLink from '../assets/url-link.svg';
@@ -32,8 +32,7 @@ import BakeryIcon from '../assets/bakery-icon.png';
 import WesternIcon from '../assets/western-icon.png';
 import AsianIcon from '../assets/asian-icon.png';
 
-const places = new kakao.maps.services.Places();
-
+const copy = require('clipboard-copy');
 const food_category = [
   { id: 'korean', name: '한식', color: '#D8E3FF', icon: RiceIcon },
   { id: 'burger', name: '버거', color: '#FFE6C0', icon: BurgerIcon },
@@ -67,6 +66,7 @@ export default class TournamentPage extends Component {
       isFinished: false,
       comp: 0,
       winnerCate: 0,
+      selected: 0
     };
     this.restaurantList = [];
     this.categoryList = {};
@@ -100,8 +100,10 @@ export default class TournamentPage extends Component {
   }
 
   setRandomInfo = async (latitude, longitude, cate) => {
+    const query = food_category[cate].id === 'asian' ?
+        "아시아음식" : food_category[cate].name;
     const restList = await getNearRestaurantList(
-        latitude, longitude, food_category[cate].name
+        latitude, longitude, query
       );
     this.restaurantList = restList;
     const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
@@ -206,13 +208,13 @@ export default class TournamentPage extends Component {
             <div style={{paddingTop: '56px'}}>
               <div style={{padding: '0 40px 0 40px'}}>
                 <div style={{fontSize: '20px', fontWeight: 'bold', paddingBottom: '32px'}}>
-                  <div>오예!</div>
                   <div style={{display: 'flex', flexDirection: 'row',
                       alignItems: 'center', height: 24, lineHeight: 24}}>
-                    오늘의 우승 메뉴
-                    <img src={SalivaEmoji} width={24} height={24} 
+                    오예!
+                    <img src={CelebrateEmoji} width={24} height={24} 
                         style={{paddingLeft: 7}} />
                   </div>
+                  <div>오늘의 우승 메뉴</div>
                 </div>
                 <div style={{display: 'flex', paddingBottom: '32px',
                     justifyContent: 'center', alignItems: 'center'}}>

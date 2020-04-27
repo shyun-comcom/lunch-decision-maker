@@ -19,10 +19,10 @@ export default class RandomPage extends Component {
   }
 
   getShareLink = () => {
-    const { latitude, longitude, selected } = this.state;
+    const { latitude, longitude, pid, cname, pname, paddress } = this.props.match.params;
     const item = this.restaurantList[selected];
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
-        + `${latitude}/${longitude}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
+        + `${latitude}/${longitude}/${pid}/${cname}/${pname}/${paddress}`;
     copy(newURL);
   }
 
