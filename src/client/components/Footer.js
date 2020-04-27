@@ -22,7 +22,7 @@ class Footer extends Component {
                 <div style={{height: '27px'}} />
                 <img src={SalivaEmoji} style={{width: 72, height: 72}} />
                 <div style={{fontSize: '36px', color: '#3D3D3D',
-                        fontWeight: 'bold', fontFamily: 'Muli Bold',
+                        fontWeight: 'bold', fontFamily: 'Muli',
                         paddingTop: '24px', paddingBottom: '40px'}}>
                     Nyam Nyam!
                 </div>

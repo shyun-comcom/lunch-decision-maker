@@ -23,7 +23,7 @@ export default class App extends Component {
                         <div>냠냠 하나면 돼!</div>
                     </div>
                     <div style={{fontSize: '36px', color: '#3D3D3D',
-                            fontWeight: 'bold', fontFamily: 'Muli Bold',
+                            fontWeight: 600, fontFamily: 'Muli',
                             paddingTop: '16px', paddingBottom: '48px'}}>
                         Nyam Nyam!
                     </div>

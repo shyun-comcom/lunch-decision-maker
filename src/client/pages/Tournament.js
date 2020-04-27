@@ -11,6 +11,7 @@ import RandomRetry from '../assets/random-retry.png';
 import AddressCopy from '../assets/address-copy.svg';
 import UrlLink from '../assets/url-link.svg';
 import TournamentVS from '../assets/tournament-vs.svg';
+import VerticalDots from '../assets/vertical-dots.svg';
 import './app.css';
 
 import DumplingIcon from '../assets/dumpling-icon.png';
@@ -131,7 +132,7 @@ export default class TournamentPage extends Component {
   renderCard = (index) => {
     const cate1 = this.matchList[index];
     const cate2 = this.matchList[index + 1];
-    return (<div style={{fontFamily: 'Muli Bold', position: 'relative'}}>
+    return (<div style={{fontFamily: 'Muli', position: 'relative'}}>
       <div className="tournament-card"
           onClick={() => this.selectOne(cate1)}
           style={{background: food_category[cate1].color}}>
@@ -233,11 +234,14 @@ export default class TournamentPage extends Component {
                   </a>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column',
-                    alignItems: 'center', justifyContent: 'center', paddingBottom: 64}}>
+                    alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
                   <div className="white-button"
                       style={{width: '200px', height: '48px', 
                           borderRadius: '24px', lineHeight: '48px'}}>
-                    결과 링크 공유하기
+                    <div style={{paddingRight: '4px', paddingBottom: '1px'}}>
+                      결과 링크 공유하기
+                    </div>
+                    <img style={{verticalAlign: 'middle'}} src={ShareLink} />
                   </div>
                   <div style={{height: '16px'}} />
                   <div className='white-button'
@@ -251,6 +255,8 @@ export default class TournamentPage extends Component {
                       <img src={RandomRetry} width={16} height={16} 
                           style={{verticalAlign: 'middle'}} />
                   </div>
+                  <div style={{height: '32px'}} />
+                  <img src={VerticalDots} />
                 </div>
               </div>
               <Footer />
