@@ -7,6 +7,7 @@ import KakaoMap from '../components/KakaoMap';
 
 import WinkEmoji from '../assets/wink-emoji.png';
 import CelebrateEmoji from '../assets/celebrate-emoji.png';
+import ScreamEmoji from '../assets/scream-emoji.png';
 import RandomRetry from '../assets/random-retry.png';
 import AddressCopy from '../assets/address-copy.svg';
 import UrlLink from '../assets/url-link.svg';
@@ -66,7 +67,8 @@ export default class TournamentPage extends Component {
       isFinished: false,
       comp: 0,
       winnerCate: 0,
-      selected: 0
+      selected: 0,
+      noResult: false
     };
     this.restaurantList = [];
     this.categoryList = {};
@@ -100,17 +102,24 @@ export default class TournamentPage extends Component {
   }
 
   setRandomInfo = async (latitude, longitude, cate) => {
+    var noResultFlag = false;
     const query = food_category[cate].id === 'asian' ?
-        "아시아음식" : food_category[cate].name;
-    const restList = await getNearRestaurantList(
+        "아시안" : food_category[cate].name;
+    var restList = await getNearRestaurantList(
         latitude, longitude, query
       );
+    if (restList.length === 0) {
+      noResultFlag = true;
+      restList = await getNearRestaurantList(latitude, longitude);
+    }
     this.restaurantList = restList;
+    console.log(restList);
     const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
     const randomRest = this.restaurantList[randomIdx];
     const position  = new kakao.maps.LatLng(randomRest.y, randomRest.x); 
 
-    this.setState({isFinished: true, selected: randomIdx, winnerCate: cate});
+    this.setState({isFinished: true, selected: randomIdx, 
+        winnerCate: cate, noResult: noResultFlag});
     var container = document.getElementById('map');
     var options = {
       center: position, 
@@ -207,31 +216,48 @@ export default class TournamentPage extends Component {
           this.state.isFinished ? 
             <div style={{paddingTop: '56px'}}>
               <div style={{padding: '0 40px 0 40px'}}>
-                <div style={{fontSize: '20px', fontWeight: 'bold', paddingBottom: '32px'}}>
-                  <div style={{display: 'flex', flexDirection: 'row',
-                      alignItems: 'center', height: 24, lineHeight: 24}}>
-                    오예!
-                    <img src={CelebrateEmoji} width={24} height={24} 
-                        style={{paddingLeft: 7}} />
-                  </div>
-                  <div>오늘의 우승 메뉴</div>
-                </div>
-                <div style={{display: 'flex', paddingBottom: '32px',
-                    justifyContent: 'center', alignItems: 'center'}}>
-                  <div style={{width: '248px', height: '182px',
-                      borderRadius: '24px', position: 'relative', 
-                      background: food_category[this.state.winnerCate].color}}>
-                    <div style={{fontSize: '24px', position: 'absolute',
-                        fontWeight: 'bold', left: 24, top: 22}}>
-                      {food_category[this.state.winnerCate].name}
+                { this.state.noResult ? 
+                  <div style={{fontSize: '20px', fontWeight: 'bold', paddingBottom: '32px'}}>
+                    <div>주변에 해당하는</div>
+                    <div style={{display: 'flex', flexDirection: 'row',
+                        alignItems: 'center', height: 24, lineHeight: 24}}>
+                      음식점이 없습니다 
+                      <img src={ScreamEmoji} width={24} height={24} 
+                          style={{paddingLeft: 7}} />
                     </div>
-                    <img src={food_category[this.state.winnerCate].icon}
-                        style={{width: 104, height: 104,
-                            position: 'absolute', right: 32, bottom: 24}} />
+                    <div>대신 냠냠이 골라줄게요!</div>
                   </div>
-                </div>
-                <div style={{width: '280px', height: '1px', background: '#E5E5E5'}} />
-                <div style={{height: '32px'}} />
+                  :
+                  <div style={{fontSize: '20px', fontWeight: 'bold', paddingBottom: '32px'}}>
+                    <div style={{display: 'flex', flexDirection: 'row',
+                        alignItems: 'center', height: 24, lineHeight: 24}}>
+                      오예!
+                      <img src={CelebrateEmoji} width={24} height={24} 
+                          style={{paddingLeft: 7}} />
+                    </div>
+                    <div>오늘의 우승 메뉴</div>
+                  </div>
+                }
+                { this.state.noResult ? null :
+                  <div>
+                    <div style={{display: 'flex', paddingBottom: '32px',
+                        justifyContent: 'center', alignItems: 'center'}}>
+                      <div style={{width: '248px', height: '182px',
+                          borderRadius: '24px', position: 'relative', 
+                          background: food_category[this.state.winnerCate].color}}>
+                        <div style={{fontSize: '24px', position: 'absolute',
+                            fontWeight: 'bold', left: 24, top: 22}}>
+                          {food_category[this.state.winnerCate].name}
+                        </div>
+                        <img src={food_category[this.state.winnerCate].icon}
+                            style={{width: 104, height: 104,
+                                position: 'absolute', right: 32, bottom: 24}} />
+                      </div>
+                    </div>
+                    <div style={{width: '280px', height: '1px', background: '#E5E5E5'}} />
+                    <div style={{height: '32px'}} />
+                  </div>
+                }
                 <KakaoMap lat={this.state.latitude} lng={this.state.longitude} />
                 <div style={{display: 'flex', flexDirection: 'row',
                     alignItems: 'center', paddingTop: '32px'}}>
