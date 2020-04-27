@@ -67,7 +67,8 @@ export default class TournamentPage extends Component {
       isFinished: false,
       comp: 0,
       winnerCate: 0,
-      selected: 0,
+      selected: [],
+      curSelected: 0,
       noResult: false
     };
     this.restaurantList = [];
@@ -113,12 +114,21 @@ export default class TournamentPage extends Component {
       restList = await getNearRestaurantList(latitude, longitude);
     }
     this.restaurantList = restList;
-    console.log(restList);
-    const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
-    const randomRest = this.restaurantList[randomIdx];
+    const idxArray = [];
+    for (var i = 0; i < Math.min(3, restList.length); ++i) {
+      while (true) {
+        const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
+        if (idxArray.includes(randomIdx)) { continue; }
+        else { 
+          idxArray.push(randomIdx);
+          break;
+        }
+      }
+    }
+    const randomRest = this.restaurantList[idxArray[0]];
     const position  = new kakao.maps.LatLng(randomRest.y, randomRest.x); 
 
-    this.setState({isFinished: true, selected: randomIdx, 
+    this.setState({isFinished: true, selected: idxArray, curSelected: 0,
         winnerCate: cate, noResult: noResultFlag});
     var container = document.getElementById('map');
     var options = {
@@ -201,15 +211,28 @@ export default class TournamentPage extends Component {
   }
 
   getShareLink = () => {
-    const { latitude, longitude, selected } = this.state;
-    const item = this.restaurantList[selected];
+    const { latitude, longitude, curSelected } = this.state;
+    const item = this.restaurantList[curSelected];
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
         + `${latitude}/${longitude}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
     copy(newURL);
   }
 
+  moveMapCenter = (item) => {
+    const { x, y } = item;
+    const position  = new kakao.maps.LatLng(y, x); 
+    var container = document.getElementById('map');
+    var options = {
+      center: position, 
+      level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options);
+    var marker = new kakao.maps.Marker({ position });
+    marker.setMap(map);
+  }
+
   render = () => {
-    const selected = this.restaurantList[this.state.selected];
     return (
       <div className="app-root-div">
         {this.state.isLoaded ? 
@@ -259,30 +282,42 @@ export default class TournamentPage extends Component {
                   </div>
                 }
                 <KakaoMap lat={this.state.latitude} lng={this.state.longitude} />
-                <div style={{display: 'flex', flexDirection: 'row',
-                    alignItems: 'center', paddingTop: '32px'}}>
-                  <div className='category-tag'
-                      style={{backgroundColor: food_category[this.state.winnerCate].color}}>
-                    {selected.category_name}
-                  </div>
-                  <div style={{paddingLeft: '8px', fontSize: '14px'}}>
-                    {selected.place_name}
-                  </div>
-                </div>
-                <div style={{color: '#929292', fontSize: '12px', height: 24,
-                    display: 'flex', flexDirection: 'row', alignItems: 'center',
-                    paddingTop: '9px', paddingBottom: '53px'}}>
-                  {selected.road_address_name}
-                  <div style={{width: '8px' }} />
-                  <img src={AddressCopy} width={24} height={24} 
-                      onClick={() => copy(selected.road_address_name)}
-                      style={{cursor: 'pointer'}} />
-                  <div style={{width: '8px' }} />
-                  <a target="_blank" href={selected.place_url}
-                      style={{width: '24px', height: '24px', cursor: 'pointer'}}>
-                    <img src={UrlLink} width={24} height={24} />
-                  </a>
-                </div>
+                <div style={{height: '16px'}} />
+                { this.state.selected.map((val, idx) => {
+                  const selected = this.restaurantList[val];
+                  const color = food_category[this.state.winnerCate].color;
+                  return (
+                    <div style={{paddingTop: '16px', paddingBottom: '16px',
+                        borderBottom: idx === this.state.selected.length - 1 ? '' : '1px solid #E5E5E5',
+                        display: 'flex', flexDirection: 'column'}}
+                        key={selected.id}>
+                      <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                        <div className='category-tag' style={{backgroundColor: color}}>
+                          {selected.category_name}
+                        </div>
+                        <div style={{paddingLeft: '8px', fontSize: '14px'}}
+                            onClick={() => this.moveMapCenter(selected)}>
+                          {selected.place_name}
+                        </div>
+                      </div>
+                      <div style={{color: '#929292', fontSize: '12px', height: 24,
+                          display: 'flex', flexDirection: 'row', alignItems: 'center',
+                          paddingTop: '9px'}}>
+                        {selected.road_address_name}
+                        <div style={{width: '8px' }} />
+                        <img src={AddressCopy} width={24} height={24} 
+                            onClick={() => copy(selected.road_address_name)}
+                            style={{cursor: 'pointer'}} />
+                        <div style={{width: '8px' }} />
+                        <a target="_blank" href={selected.place_url}
+                            style={{width: '24px', height: '24px', cursor: 'pointer'}}>
+                          <img src={UrlLink} width={24} height={24} />
+                        </a>
+                      </div>
+                    </div>
+                  )
+                })}
+                <div style={{height: '36px'}} />
                 <div style={{display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
                   <div className="white-button"
