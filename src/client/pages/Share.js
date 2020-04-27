@@ -5,25 +5,16 @@ import KakaoMap from '../components/KakaoMap';
 
 import SalivaEmoji from '../assets/saliva-emoji.png';
 import AddressCopy from '../assets/address-copy.svg';
+import HandupIcon from '../assets/handup-icon.png';
 import UrlLink from '../assets/url-link.svg';
-import ShareLink from '../assets/share-link.svg';
 import VerticalDots from '../assets/vertical-dots.svg';
 import './app.css';
 
-const places = new kakao.maps.services.Places();
 const copy = require('clipboard-copy');
 
-export default class RandomPage extends Component {
+export default class SharePage extends Component {
   constructor(props) {
     super(props);
-  }
-
-  getShareLink = () => {
-    const { latitude, longitude, pid, cname, pname, paddress } = this.props.match.params;
-    const item = this.restaurantList[selected];
-    var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
-        + `${latitude}/${longitude}/${pid}/${cname}/${pname}/${paddress}`;
-    copy(newURL);
   }
 
   render = () => {
@@ -68,13 +59,13 @@ export default class RandomPage extends Component {
             <div style={{display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
               <div className="white-button"
-                  onClick={() => this.getShareLink()}
+                  onClick={() => this.props.history.push('/')}
                   style={{width: '200px', height: '48px', 
                       borderRadius: '24px', lineHeight: '48px'}}>
                 <div style={{paddingRight: '4px', paddingBottom: '1px'}}>
-                  결과 링크 공유하기
+                  나도 해보기
                 </div>
-                <img style={{verticalAlign: 'middle'}} src={ShareLink} />
+                <img style={{verticalAlign: 'middle'}} src={HandupIcon} />
               </div>
               <div style={{height: '32px'}} />
               <img src={VerticalDots} />

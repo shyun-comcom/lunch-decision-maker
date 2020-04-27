@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
 
 import AinizeLogo from '../assets/ainize-logo.svg';
 import BurgerIcon from '../assets/burger-icon.png';
@@ -7,7 +6,6 @@ import DumplingIcon from '../assets/dumpling-icon.png';
 import ChickenIcon from '../assets/chicken-icon.png';
 import './app.css';
 
-@observer
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +28,7 @@ export default class App extends Component {
                     <div className='dark-button'
                         style={{width: '160px', height: '48px', 
                                 borderRadius: '24px', lineHeight: '48px'}}
-                        onClick={() => this.props.history.push('home')}>
+                        onClick={() => this.props.history.push('/home')}>
                         시작하기
                     </div>
                 </div>
