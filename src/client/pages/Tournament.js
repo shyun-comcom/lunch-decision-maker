@@ -11,6 +11,7 @@ import RandomRetry from '../assets/random-retry.png';
 import AddressCopy from '../assets/address-copy.svg';
 import UrlLink from '../assets/url-link.svg';
 import TournamentVS from '../assets/tournament-vs.svg';
+import ShareLink from '../assets/share-link.svg';
 import VerticalDots from '../assets/vertical-dots.svg';
 import './app.css';
 
@@ -162,7 +163,7 @@ export default class TournamentPage extends Component {
     </div>)
   }
 
-  getRoundString = () => {
+  getProgressString = () => {
     const { comp } = this.state;
     if (comp < 16) { 
       return `${comp / 2 + 1} / 8`;
@@ -170,6 +171,19 @@ export default class TournamentPage extends Component {
       return `${(comp - 16) / 2 + 1} / 4`;
     } else if (comp < 28) {
       return `${(comp - 24) / 2 + 1} / 2`;
+    } else {
+      return '1 / 1';
+    }
+  }
+
+  getRoundString = () => {
+    const { comp } = this.state;
+    if (comp < 16) { 
+      return '16강';
+    } else if (comp < 24) {
+      return '8강';
+    } else if (comp < 28) {
+      return '4강';
     } else {
       return '결승';
     }
@@ -276,11 +290,17 @@ export default class TournamentPage extends Component {
                   </div>
                   <div style={{height: 8}} />
                 </div>
-                <div style={{height: 40, padding: '0 22px', background: '#EAEAEA',
-                    lineHeight: 40, borderRadius: 24, display: 'flex',
-                    justifyContent: 'center', alignItems: 'center',
-                    fontSize: '16px', fontWeight: 'bold', color: '#929292'}}>
-                  {this.getRoundString()}
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                  <div style={{fontSize: '14px', fontWeight: 'bold', color: '#929292'}}>
+                    {this.getRoundString()}
+                  </div>
+                  <div style={{height: 8}} />
+                  <div style={{height: 40, padding: '0 22px', background: '#EAEAEA',
+                      lineHeight: 40, borderRadius: 24, display: 'flex',
+                      justifyContent: 'center', alignItems: 'center',
+                      fontSize: '16px', fontWeight: 'bold', color: '#929292'}}>
+                    {this.getProgressString()}
+                  </div>
                 </div>
               </div>
               <div style={{display: 'flex', flexDirection: 'column',
