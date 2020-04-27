@@ -27,8 +27,6 @@ export default class RandomPage extends Component {
       latitude: 0,
       longitude: 0,
       selected: 0,
-      height: 0,
-      width: 0
     };
     this.restaurantList = [];
     this.categoryList = {};
@@ -61,6 +59,14 @@ export default class RandomPage extends Component {
       var map = new kakao.maps.Map(container, options);
       var marker = new kakao.maps.Marker({ position });
       marker.setMap(map);
+  }
+
+  getShareLink = () => {
+    const { latitude, longitude, selected } = this.state;
+    const item = this.restaurantList[selected];
+    var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
+        + `${latitude}/${longitude}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
+    copy(newURL);
   }
 
   render = () => {
@@ -107,6 +113,7 @@ export default class RandomPage extends Component {
               <div style={{display: 'flex', flexDirection: 'column',
                   alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
                 <div className="white-button"
+                    onClick={() => this.getShareLink()}
                     style={{width: '200px', height: '48px', 
                         borderRadius: '24px', lineHeight: '48px'}}>
                   <div style={{paddingRight: '4px', paddingBottom: '1px'}}>
