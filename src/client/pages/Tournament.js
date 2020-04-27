@@ -133,7 +133,7 @@ export default class TournamentPage extends Component {
   renderCard = (index) => {
     const cate1 = this.matchList[index];
     const cate2 = this.matchList[index + 1];
-    return (<div style={{fontFamily: 'Muli', position: 'relative'}}>
+    return (<div style={{position: 'relative'}}>
       <div className="tournament-card"
           onClick={() => this.selectOne(cate1)}
           style={{background: food_category[cate1].color}}>
@@ -187,6 +187,14 @@ export default class TournamentPage extends Component {
     } else {
       return '결승';
     }
+  }
+
+  getShareLink = () => {
+    const { latitude, longitude, selected } = this.state;
+    const item = this.restaurantList[selected];
+    var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
+        + `${latitude}/${longitude}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
+    copy(newURL);
   }
 
   render = () => {
@@ -250,6 +258,7 @@ export default class TournamentPage extends Component {
                 <div style={{display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
                   <div className="white-button"
+                      onClick={() => this.getShareLink()}
                       style={{width: '200px', height: '48px', 
                           borderRadius: '24px', lineHeight: '48px'}}>
                     <div style={{paddingRight: '4px', paddingBottom: '1px'}}>

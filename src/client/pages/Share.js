@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Footer from '../components/Footer';
 import KakaoMap from '../components/KakaoMap';
 
-import RandomRetry from '../assets/random-retry.png';
 import SalivaEmoji from '../assets/saliva-emoji.png';
 import AddressCopy from '../assets/address-copy.svg';
 import UrlLink from '../assets/url-link.svg';
@@ -17,6 +16,14 @@ const copy = require('clipboard-copy');
 export default class RandomPage extends Component {
   constructor(props) {
     super(props);
+  }
+
+  getShareLink = () => {
+    const { latitude, longitude, selected } = this.state;
+    const item = this.restaurantList[selected];
+    var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
+        + `${latitude}/${longitude}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
+    copy(newURL);
   }
 
   render = () => {
@@ -61,6 +68,7 @@ export default class RandomPage extends Component {
             <div style={{display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
               <div className="white-button"
+                  onClick={() => this.getShareLink()}
                   style={{width: '200px', height: '48px', 
                       borderRadius: '24px', lineHeight: '48px'}}>
                 <div style={{paddingRight: '4px', paddingBottom: '1px'}}>
