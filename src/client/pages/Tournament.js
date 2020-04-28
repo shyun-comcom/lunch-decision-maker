@@ -216,6 +216,7 @@ export default class TournamentPage extends Component {
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
         + `${latitude}/${longitude}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
     copy(newURL);
+    alert('공유 링크가 복사되었습니다.');
   }
 
   moveMapCenter = (item) => {
@@ -306,7 +307,10 @@ export default class TournamentPage extends Component {
                         {selected.road_address_name}
                         <div style={{width: '8px' }} />
                         <img src={AddressCopy} width={24} height={24} 
-                            onClick={() => copy(selected.road_address_name)}
+                            onClick={() => {
+                              copy(selected.road_address_name);
+                              alert('주소가 복사되었습니다.');
+                            }}
                             style={{cursor: 'pointer'}} />
                         <div style={{width: '8px' }} />
                         <a target="_blank" href={selected.place_url}

@@ -48,7 +48,10 @@ export default class SharePage extends Component {
               {paddress}
               <div style={{width: '8px' }} />
               <img src={AddressCopy} width={24} height={24} 
-                  onClick={() => copy(paddress)}
+                  onClick={() => {
+                    copy(paddress);
+                    alert('주소가 복사되었습니다.');
+                  }}
                   style={{cursor: 'pointer'}} />
               <div style={{width: '8px' }} />
               <a target="_blank" href={`https://place.map.kakao.com/${pid}`}
