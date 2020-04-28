@@ -10,7 +10,7 @@ import UrlLink from '../assets/url-link.svg';
 import VerticalDots from '../assets/vertical-dots.svg';
 import './app.css';
 
-const copy = require('clipboard-copy');
+const copy = require('copy-text-to-clipboard');
 
 export default class SharePage extends Component {
   constructor(props) {

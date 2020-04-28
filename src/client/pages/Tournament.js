@@ -33,7 +33,7 @@ import BakeryIcon from '../assets/bakery-icon.png';
 import WesternIcon from '../assets/western-icon.png';
 import AsianIcon from '../assets/asian-icon.png';
 
-const copy = require('clipboard-copy');
+const copy = require('copy-text-to-clipboard');
 const food_category = [
   { id: 'korean', name: '한식', color: '#D8E3FF', icon: RiceIcon },
   { id: 'burger', name: '버거', color: '#FFE6C0', icon: BurgerIcon },

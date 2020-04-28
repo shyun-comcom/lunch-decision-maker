@@ -13,8 +13,7 @@ import ShareLink from '../assets/share-link.svg';
 import VerticalDots from '../assets/vertical-dots.svg';
 import './app.css';
 
-const places = new kakao.maps.services.Places();
-const copy = require('clipboard-copy');
+const copy = require('copy-text-to-clipboard');
 
 export default class RandomPage extends Component {
   restaurantList;
