@@ -80,6 +80,7 @@ export default class TournamentPage extends Component {
 
   getShuffledMatch = () => {
     /* tournament info */
+    this.matchList = [];
     for (var i = 0; i < 16; i++) {
       this.matchList[i] = i;
     }
