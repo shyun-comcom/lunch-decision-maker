@@ -67,7 +67,15 @@ export async function getNearRestaurantList(latitude, longitude, keyword='') {
     const res = await Promise.all(promises);
     var restList = [];
     res.forEach((elem) => {
-        restList = restList.concat(elem);
+        var dupFlag = false;
+        restList.forEach((item) => {
+            if (item.id === elem[0].id) { 
+                dupFlag = true;
+            }
+        });
+        if (!dupFlag) { 
+            restList = restList.concat(elem);
+        }
     });
     return restList;
 }
