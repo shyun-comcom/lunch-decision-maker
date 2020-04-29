@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { getNearRestaurantList } from '../utils';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
@@ -52,6 +54,20 @@ const food_category = [
   { id: 'western', name: '양식', color: '#FFE3DA', icon : WesternIcon },
   { id: 'asian', name: '아시안', color: '#D8E3FF', icon : AsianIcon },
 ];
+
+const TournamentButton = withStyles({
+  root: {
+    background: 'transparent',
+    borderRadius: 24,
+    border: 'none',
+    height: 182,
+    minWidth: 248,
+    maxWidth: 248,
+  },
+  label: {
+    textTransform: 'none'
+  }
+})(Button);
 
 export default class TournamentPage extends Component {
   restaurantList;
@@ -156,7 +172,7 @@ export default class TournamentPage extends Component {
     const cate1 = this.matchList[index];
     const cate2 = this.matchList[index + 1];
     return (<div style={{position: 'relative'}}>
-      <div className="tournament-card"
+      <TournamentButton className="tournament-card"
           onClick={() => this.selectOne(cate1)}
           style={{background: food_category[cate1].color}}>
         <div style={{fontSize: '24px', position: 'absolute',
@@ -166,9 +182,9 @@ export default class TournamentPage extends Component {
         <img src={food_category[cate1].icon}
             style={{width: 104, height: 104,
                 position: 'absolute', right: 32, bottom: 24}} />
-      </div>
+      </TournamentButton>
       <div style={{height: '30px'}} />
-      <div className="tournament-card"
+      <TournamentButton className="tournament-card"
           onClick={() => this.selectOne(cate2)}
           style={{background: food_category[cate2].color}}>
         <div style={{fontSize: '24px', position: 'absolute',
@@ -178,7 +194,7 @@ export default class TournamentPage extends Component {
         <img src={food_category[cate2].icon}
             style={{width: 104, height: 104,
                 position: 'absolute', right: 32, bottom: 24}} />
-      </div>
+      </TournamentButton>
       <div className="centered-vs">
         <img src={TournamentVS} />
       </div>

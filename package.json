@@ -12,6 +12,7 @@
   "author": "Sandeep Raveesh",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.9.12",
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
     "clipboard-copy": "^3.1.0",
