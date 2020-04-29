@@ -126,9 +126,6 @@ body {
   position: relative;
   cursor: pointer;
 }
-.tournament-card:hover {
-  opacity: 0.5;
-}
 
 .centered-vs {
   position: absolute;
