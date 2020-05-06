@@ -12,7 +12,7 @@ export default class ErrorPage extends Component {
     return (
         <div className="app-root-div" style={{padding: '60px 40px 60px 40px'}}>
             <div style={{fontSize: '20px', color: '#929292', 
-                    fontFamily: 'Noto Sans KR'}}>
+                    fontFamily: 'Noto Sans KR', fontWeight: 'bold'}}>
                 <div>위치 정보 서비스 공유를</div>
                 <div>허용해 주세요</div>
             </div>

@@ -89,6 +89,7 @@ export default class TournamentPage extends Component {
   categoryList;
   matchList;
   kakaoMap;
+  curSelected;
 
   constructor(props) {
     super(props);
@@ -100,7 +101,6 @@ export default class TournamentPage extends Component {
       comp: 0,
       winnerCate: 0,
       selected: [],
-      curSelected: 0,
       noResult: false
     };
     this.restaurantList = [];
@@ -163,7 +163,8 @@ export default class TournamentPage extends Component {
     }
     const randomRest = this.restaurantList[idxArray[0]];
 
-    this.setState({isFinished: true, selected: idxArray, curSelected: 0,
+    this.curSelected = randomRest;
+    this.setState({isFinished: true, selected: idxArray,
         winnerCate: cate, noResult: noResultFlag});
     this.kakaoMap.current.moveMap(randomRest.y, randomRest.x);
   }
@@ -238,15 +239,15 @@ export default class TournamentPage extends Component {
   }
 
   getShareLink = () => {
-    const { latitude, longitude, curSelected } = this.state;
-    const item = this.restaurantList[curSelected];
+    const item = this.curSelected;
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
-        + `${latitude}/${longitude}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
+        + `${item.y}/${item.x}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
     copy(encodeURI(newURL));
     alert('공유 링크가 복사되었습니다.');
   }
 
   moveMapCenter = (item) => {
+    this.curSelected = item;
     this.kakaoMap.current.moveMap(item.y, item.x);
   }
 
