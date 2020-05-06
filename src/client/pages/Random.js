@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { getNearRestaurantList } from '../utils';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
@@ -12,6 +14,21 @@ import UrlLink from '../assets/url-link.svg';
 import ShareLink from '../assets/share-link.svg';
 import VerticalDots from '../assets/vertical-dots.svg';
 import './app.css';
+
+const ResultButton = withStyles({
+  root: {
+    background: '#ffffff',
+    borderRadius: 24,
+    border: '1px solid #DFDFDF',
+    boxSizing: 'border-box',
+    height: 48,
+    minWidth: 200,
+    maxWidth: 200,
+  },
+  label: {
+    textTransform: 'none'
+  }
+})(Button);
 
 const copy = require('copy-text-to-clipboard');
 
@@ -115,24 +132,18 @@ export default class RandomPage extends Component {
               </div>
               <div style={{display: 'flex', flexDirection: 'column',
                   alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
-                <div className="white-button"
-                    onClick={() => this.getShareLink()}
-                    style={{width: '200px', height: '48px', 
-                        borderRadius: '24px', lineHeight: '48px'}}>
-                  <div style={{paddingRight: '4px', paddingBottom: '1px'}}>
-                    결과 링크 공유하기
-                  </div>
+                <ResultButton className="white-button"
+                    onClick={() => this.getShareLink()}>
+                  <div style={{paddingRight: '4px'}}>결과 링크 공유하기</div>
                   <img style={{verticalAlign: 'middle'}} src={ShareLink} />
-                </div>
+                </ResultButton>
                 <div style={{height: '16px'}} />
-                <div className='white-button'
-                    onClick={() => this.setRandomInfo(latitude, longitude)}
-                    style={{width: '190px', height: '48px', fontSize: '16px',
-                            lineHeight: '49px', borderRadius: '24px'}}>
+                <ResultButton className='white-button'
+                    onClick={() => this.setRandomInfo(latitude, longitude)}>
                     <div style={{paddingRight: '4px'}}>한번 더 랜덤</div>
                     <img src={RandomRetry} width={16} height={16} 
                         style={{verticalAlign: 'middle'}} />
-                </div>
+                </ResultButton>
                 <div style={{height: '32px'}} />
                 <img src={VerticalDots} />
               </div>

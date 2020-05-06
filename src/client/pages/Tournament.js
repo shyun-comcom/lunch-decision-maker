@@ -69,6 +69,21 @@ const TournamentButton = withStyles({
   }
 })(Button);
 
+const ResultButton = withStyles({
+  root: {
+    background: '#ffffff',
+    borderRadius: 24,
+    border: '1px solid #DFDFDF',
+    boxSizing: 'border-box',
+    height: 48,
+    minWidth: 200,
+    maxWidth: 200,
+  },
+  label: {
+    textTransform: 'none'
+  }
+})(Button);
+
 export default class TournamentPage extends Component {
   restaurantList;
   categoryList;
@@ -341,27 +356,21 @@ export default class TournamentPage extends Component {
                 <div style={{height: '36px'}} />
                 <div style={{display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
-                  <div className="white-button"
-                      onClick={() => this.getShareLink()}
-                      style={{width: '200px', height: '48px', 
-                          borderRadius: '24px', lineHeight: '48px'}}>
-                    <div style={{paddingRight: '4px', paddingBottom: '1px'}}>
-                      결과 링크 공유하기
-                    </div>
+                  <ResultButton className="white-button"
+                      onClick={() => this.getShareLink()}>
+                    <div style={{paddingRight: '4px'}}>결과 링크 공유하기</div>
                     <img style={{verticalAlign: 'middle'}} src={ShareLink} />
-                  </div>
+                  </ResultButton>
                   <div style={{height: '16px'}} />
-                  <div className='white-button'
+                  <ResultButton className='white-button'
                       onClick={() => {
                         this.getShuffledMatch();
                         this.setState({comp: 0, isFinished: false, winnerCate: 0});
-                      }}
-                      style={{width: '190px', height: '48px', fontSize: '16px',
-                              lineHeight: '49px', borderRadius: '24px'}}>
+                      }}>
                       <div style={{paddingRight: '4px'}}>다시 하기</div>
                       <img src={RandomRetry} width={16} height={16} 
                           style={{verticalAlign: 'middle'}} />
-                  </div>
+                  </ResultButton>
                   <div style={{height: '32px'}} />
                   <img src={VerticalDots} />
                 </div>

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 import Footer from '../components/Footer';
 import KakaoMap from '../components/KakaoMap';
@@ -9,6 +11,21 @@ import HandupIcon from '../assets/handup-icon.png';
 import UrlLink from '../assets/url-link.svg';
 import VerticalDots from '../assets/vertical-dots.svg';
 import './app.css';
+
+const ResultButton = withStyles({
+  root: {
+    background: '#ffffff',
+    borderRadius: 24,
+    border: '1px solid #DFDFDF',
+    boxSizing: 'border-box',
+    height: 48,
+    minWidth: 200,
+    maxWidth: 200,
+  },
+  label: {
+    textTransform: 'none'
+  }
+})(Button);
 
 const copy = require('copy-text-to-clipboard');
 
@@ -61,15 +78,11 @@ export default class SharePage extends Component {
             </div>
             <div style={{display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
-              <div className="white-button"
-                  onClick={() => this.props.history.push('/')}
-                  style={{width: '200px', height: '48px', 
-                      borderRadius: '24px', lineHeight: '48px'}}>
-                <div style={{paddingRight: '4px', paddingBottom: '1px'}}>
-                  나도 해보기
-                </div>
+              <ResultButton className="white-button"
+                  onClick={() => this.props.history.push('/')}>
+                <div style={{paddingRight: '4px'}}>나도 해보기</div>
                 <img style={{verticalAlign: 'middle'}} src={HandupIcon} />
-              </div>
+              </ResultButton>
               <div style={{height: '32px'}} />
               <img src={VerticalDots} />
             </div>
