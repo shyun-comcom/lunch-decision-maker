@@ -88,6 +88,7 @@ export default class TournamentPage extends Component {
   restaurantList;
   categoryList;
   matchList;
+  kakaoMap;
 
   constructor(props) {
     super(props);
@@ -105,6 +106,7 @@ export default class TournamentPage extends Component {
     this.restaurantList = [];
     this.categoryList = {};
     this.matchList = [];
+    this.kakaoMap = React.createRef();
 
     this.getShuffledMatch();
   }
@@ -158,19 +160,10 @@ export default class TournamentPage extends Component {
       }
     }
     const randomRest = this.restaurantList[idxArray[0]];
-    const position  = new kakao.maps.LatLng(randomRest.y, randomRest.x); 
 
     this.setState({isFinished: true, selected: idxArray, curSelected: 0,
         winnerCate: cate, noResult: noResultFlag});
-    var container = document.getElementById('map');
-    var options = {
-      center: position, 
-      level: 3 //지도의 레벨(확대, 축소 정도)
-    };
-
-    var map = new kakao.maps.Map(container, options);
-    var marker = new kakao.maps.Marker({ position });
-    marker.setMap(map);
+    this.kakaoMap.current.moveMap(randomRest.y, randomRest.x);
   }
 
   selectOne = async (cate) => {
@@ -252,17 +245,7 @@ export default class TournamentPage extends Component {
   }
 
   moveMapCenter = (item) => {
-    const { x, y } = item;
-    const position  = new kakao.maps.LatLng(y, x); 
-    var container = document.getElementById('map');
-    var options = {
-      center: position, 
-      level: 3 //지도의 레벨(확대, 축소 정도)
-    };
-
-    var map = new kakao.maps.Map(container, options);
-    var marker = new kakao.maps.Marker({ position });
-    marker.setMap(map);
+    this.kakaoMap.current.moveMap(item.y, item.x);
   }
 
   render = () => {
@@ -314,7 +297,8 @@ export default class TournamentPage extends Component {
                     <div style={{height: '32px'}} />
                   </div>
                 }
-                <KakaoMap lat={this.state.latitude} lng={this.state.longitude} />
+                <KakaoMap lat={this.state.latitude} lng={this.state.longitude} 
+                    ref={this.kakaoMap} />
                 <div style={{height: '16px'}} />
                 { this.state.selected.map((val, idx) => {
                   const selected = this.restaurantList[val];

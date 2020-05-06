@@ -35,6 +35,7 @@ const copy = require('copy-text-to-clipboard');
 export default class RandomPage extends Component {
   restaurantList;
   categoryList;
+  kakaoMap;
 
   constructor(props) {
     super(props);
@@ -46,6 +47,7 @@ export default class RandomPage extends Component {
     };
     this.restaurantList = [];
     this.categoryList = {};
+    this.kakaoMap = React.createRef();
   }
 
   componentDidMount() {
@@ -59,22 +61,14 @@ export default class RandomPage extends Component {
   }
 
   setRandomInfo = async (latitude, longitude) => {
-      const restList = await getNearRestaurantList(latitude, longitude);
-      this.restaurantList = restList;
-      const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
-      const randomRest = this.restaurantList[randomIdx];
-      const position  = new kakao.maps.LatLng(randomRest.y, randomRest.x); 
+    const restList = await getNearRestaurantList(latitude, longitude);
+    this.restaurantList = restList;
+    const randomIdx = Math.floor(Math.random() * this.restaurantList.length);
+    const randomRest = this.restaurantList[randomIdx];
 
-      this.setState({isLoaded: true, width: 280, height: 180, selected: randomIdx});
-      var container = document.getElementById('map');
-      var options = {
-        center: position, 
-        level: 3 //지도의 레벨(확대, 축소 정도)
-      };
+    this.setState({isLoaded: true, width: 280, height: 180, selected: randomIdx});
 
-      var map = new kakao.maps.Map(container, options);
-      var marker = new kakao.maps.Marker({ position });
-      marker.setMap(map);
+    this.kakaoMap.current.moveMap(randomRest.y, randomRest.x);
   }
 
   getShareLink = () => {
@@ -103,7 +97,8 @@ export default class RandomPage extends Component {
                 </div>
                 <div>오늘의 메뉴와 식당, 어때?</div>
               </div>
-              <KakaoMap lat={this.state.latitude} lng={this.state.longitude} />
+              <KakaoMap lat={this.state.latitude} lng={this.state.longitude} 
+                  ref={this.kakaoMap} />
               <div style={{display: 'flex', flexDirection: 'row',
                   alignItems: 'center', paddingTop: '32px'}}>
                 <div className='category-tag' style={{backgroundColor: '#D8E3FF'}}>
