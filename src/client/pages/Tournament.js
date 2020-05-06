@@ -240,7 +240,7 @@ export default class TournamentPage extends Component {
     const item = this.restaurantList[curSelected];
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
         + `${latitude}/${longitude}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
-    copy(newURL);
+    copy(encodeURI(newURL));
     alert('공유 링크가 복사되었습니다.');
   }
 
