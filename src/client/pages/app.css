@@ -1,6 +1,7 @@
 html { 
   height: 100%;
-  -webkit-user-select: none
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 body {
