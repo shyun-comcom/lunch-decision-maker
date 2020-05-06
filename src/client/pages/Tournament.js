@@ -89,7 +89,6 @@ export default class TournamentPage extends Component {
   categoryList;
   matchList;
   kakaoMap;
-  curSelected;
 
   constructor(props) {
     super(props);
@@ -101,7 +100,8 @@ export default class TournamentPage extends Component {
       comp: 0,
       winnerCate: 0,
       selected: [],
-      noResult: false
+      noResult: false,
+      selectedIdx: 0
     };
     this.restaurantList = [];
     this.categoryList = {};
@@ -163,9 +163,8 @@ export default class TournamentPage extends Component {
     }
     const randomRest = this.restaurantList[idxArray[0]];
 
-    this.curSelected = randomRest;
     this.setState({isFinished: true, selected: idxArray,
-        winnerCate: cate, noResult: noResultFlag});
+        winnerCate: cate, noResult: noResultFlag, selectedIdx: idxArray[0]});
     this.kakaoMap.current.moveMap(randomRest.y, randomRest.x);
   }
 
@@ -239,16 +238,18 @@ export default class TournamentPage extends Component {
   }
 
   getShareLink = () => {
-    const item = this.curSelected;
+    const { selected, selectedIdx } = this.state;
+    const item = this.restaurantList[selected[selectedIdx]];
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
         + `${item.y}/${item.x}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
     copy(encodeURI(newURL));
     alert('공유 링크가 복사되었습니다.');
   }
 
-  moveMapCenter = (item) => {
-    this.curSelected = item;
-    this.kakaoMap.current.moveMap(item.y, item.x);
+  moveMapCenter = (index) => {
+    this.setState({selectedIdx: index})
+    const {x, y} = this.restaurantList[this.state.selected[index]];
+    this.kakaoMap.current.moveMap(y, x);
   }
 
   render = () => {
@@ -315,8 +316,9 @@ export default class TournamentPage extends Component {
                         <div className='category-tag' style={{backgroundColor: color}}>
                           {selected.category_name}
                         </div>
-                        <div style={{paddingLeft: '8px', fontSize: '14px'}}
-                            onClick={() => this.moveMapCenter(selected)}>
+                        <div style={{paddingLeft: '8px', fontSize: '14px', cursor: 'pointer',
+                            color: this.state.selectedIdx === idx ? '#428ff7' : '#000000'}}
+                            onClick={() => this.moveMapCenter(idx)}>
                           {selected.place_name}
                         </div>
                       </div>
