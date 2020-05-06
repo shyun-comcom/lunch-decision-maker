@@ -7,6 +7,7 @@ import HomePage from './pages/Home';
 import RandomPage from './pages/Random';
 import TournamentPage from './pages/Tournament';
 import SharePage from './pages/Share';
+import ErrorPage from './pages/Error';
 
 ReactDOM.render(
     <Router>
@@ -16,6 +17,7 @@ ReactDOM.render(
             <Route path="/random" component={RandomPage} />
             <Route path="/tournament" component={TournamentPage} />
             <Route path="/share/:latitude/:longitude/:pid/:cname/:pname/:paddress" component={SharePage} />
+            <Route path="/error" component={ErrorPage} />
         </Switch>
     </Router>,
     document.getElementById('root'));

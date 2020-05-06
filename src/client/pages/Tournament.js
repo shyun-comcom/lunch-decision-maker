@@ -133,6 +133,8 @@ export default class TournamentPage extends Component {
         latitude, longitude,
         isLoaded: true
       });
+    }, (error) => {
+      this.props.history.push('/error');
     });
   }
 

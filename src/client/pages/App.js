@@ -32,10 +32,12 @@ export default class App extends Component {
                         시작하기
                     </div>
                 </div>
-                <a style={{flex: 1, display: 'flex', justifyContent: 'center'}}
-                    target="_blank" href="https://link.ainize.ai/3cf5h0M">
-                    <img src={AinizeLogo} style={{paddingTop: '304px'}} />
-                </a>
+                <div style={{height: '304px'}} />
+                <div style={{flex: 1, display: 'flex', justifyContent: 'center'}}>
+                    <a target="_blank" href="https://link.ainize.ai/3cf5h0M">
+                        <img src={AinizeLogo} />
+                    </a>
+                </div>
                 <div className='circle-div' 
                     style={{top: 449, left: -19, background: '#FFF5D0',
                             boxShadow: '0px 2px 16px #FFD43E'}}>

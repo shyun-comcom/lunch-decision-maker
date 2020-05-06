@@ -57,6 +57,8 @@ export default class RandomPage extends Component {
         latitude, longitude
       });
       this.setRandomInfo(latitude, longitude);
+    }, (error) => {
+      this.props.history.push('/error');
     });
   }
 
