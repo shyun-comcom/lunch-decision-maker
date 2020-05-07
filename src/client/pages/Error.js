@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MetaTags from 'react-meta-tags';
+import { Helmet } from 'react-helmet';
 import './app.css';
 
 import WorldMap from '../assets/world-map.png';
@@ -12,7 +12,7 @@ export default class ErrorPage extends Component {
   render = () => {
     return (
         <div className="app-root-div" style={{padding: '60px 40px 60px 40px'}}>
-            <MetaTags>
+            <Helmet>
             <meta property="og:title" content="Nyam Nyam" />
             <meta property="og:type" content="website" />
             <meta property="og:description"
@@ -20,7 +20,7 @@ export default class ErrorPage extends Component {
                     Can’t decide? Let “Nyam Nyam” make a choice for you :)" />
             <meta property="og:image" 
                 content={require('../assets/og-tag-image.png')} />
-            </MetaTags>
+            </Helmet>
             <div style={{fontSize: '20px', color: '#929292', 
                     fontFamily: 'Noto Sans KR', fontWeight: 'bold'}}>
                 <div>위치 정보 서비스 공유를</div>

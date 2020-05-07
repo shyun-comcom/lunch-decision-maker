@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MetaTags from 'react-meta-tags';
+import { Helmet } from "react-helmet";
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -39,7 +39,7 @@ export default class SharePage extends Component {
     const { latitude, longitude, pid, cname, pname, paddress } = this.props.match.params;
     return ( 
       <div className="app-root-div">
-        <MetaTags>
+        <Helmet>
           <meta property="og:title" content="Nyam Nyam" />
           <meta property="og:type" content="website" />
           <meta property="og:description"
@@ -47,7 +47,7 @@ export default class SharePage extends Component {
                   Can’t decide? Let “Nyam Nyam” make a choice for you :)" />
           <meta property="og:image" 
               content={require('../assets/og-tag-image.png')} />
-        </MetaTags>
+        </Helmet>
         <div style={{paddingTop: '56px'}}>
           <div style={{padding: '0 40px 0 40px'}}>
             <div style={{paddingBottom: '40px'}}>

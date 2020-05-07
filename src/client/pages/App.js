@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MetaTags from 'react-meta-tags';
+import { Helmet } from 'react-helmet';
 
 import AinizeLogo from '../assets/ainize-logo.svg';
 import BurgerIcon from '../assets/burger-icon.png';
@@ -15,7 +15,7 @@ export default class App extends Component {
     render() {
         return (
             <div className='app-root-div' style={{position: 'relative'}}>
-                <MetaTags>
+                <Helmet>
                     <meta property="og:title" content="Nyam Nyam" />
                     <meta property="og:type" content="website" />
                     <meta property="og:description"
@@ -23,7 +23,7 @@ export default class App extends Component {
                             Can’t decide? Let “Nyam Nyam” make a choice for you :)" />
                     <meta property="og:image" 
                         content={require('../assets/og-tag-image.png')} />
-                </MetaTags>
+                </Helmet>
                 <div style={{paddingLeft: '20px', paddingTop: '56px'}}>
                     <div style={{fontSize: '20px', color: '#3C3C3C', 
                             fontFamily: 'Noto Sans KR'}}>

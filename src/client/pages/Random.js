@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MetaTags from 'react-meta-tags';
+import { Helmet } from 'react-helmet';
 import { getNearRestaurantList } from '../utils';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -88,7 +88,7 @@ export default class RandomPage extends Component {
     const selected = this.restaurantList[this.state.selected];
     return ( 
       <div className="app-root-div">
-        <MetaTags>
+        <Helmet>
           <meta property="og:title" content="Nyam Nyam" />
           <meta property="og:type" content="website" />
           <meta property="og:description"
@@ -96,7 +96,7 @@ export default class RandomPage extends Component {
                   Can’t decide? Let “Nyam Nyam” make a choice for you :)" />
           <meta property="og:image" 
               content={require('../assets/og-tag-image.png')} />
-        </MetaTags>
+        </Helmet>
         {this.state.isLoaded ?
           <div style={{paddingTop: '56px'}}>
             <div style={{padding: '0 40px 0 40px'}}>

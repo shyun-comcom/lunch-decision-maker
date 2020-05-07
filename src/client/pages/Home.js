@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MetaTags from 'react-meta-tags';
+import { Helmet } from 'react-helmet';
 import './app.css';
 
 import BlowEmoji from '../assets/blow-emoji.png';
@@ -14,7 +14,7 @@ export default class HomePage extends Component {
   render = () => {
     return (
       <div className="app-root-div" style={{padding: '60px 40px 60px 40px'}}>
-        <MetaTags>
+        <Helmet>
           <meta property="og:title" content="Nyam Nyam" />
           <meta property="og:type" content="website" />
           <meta property="og:description"
@@ -22,7 +22,7 @@ export default class HomePage extends Component {
                   Can’t decide? Let “Nyam Nyam” make a choice for you :)" />
           <meta property="og:image" 
               content={require('../assets/og-tag-image.png')} />
-        </MetaTags>
+        </Helmet>
         <div className="home-item-box" id="random">
             <div className="home-item-desc">
               <div>둘 중 하나 고르기도 REAL 스트레스?!</div>
