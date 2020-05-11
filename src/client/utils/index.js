@@ -85,6 +85,5 @@ export async function getNearRestaurantList(latitude, longitude, keyword='') {
 export async function getShortenURL(url) {
     const shortenUrl = firebase.functions().httpsCallable('shortenURL');
     const newUrl = await shortenUrl({originalUrl: url});
-    console.log(newUrl);
-    return newUrl;
+    return newUrl.data;
 }

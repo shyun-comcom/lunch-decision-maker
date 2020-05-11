@@ -82,7 +82,7 @@ export default class RandomPage extends Component {
         + `${item.y}/${item.x}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
     try {
       const shortenURL = await getShortenURL(newURL);
-      copy(encodeURI(shortenURL));
+      copy(shortenURL);
       alert('공유 링크가 복사되었습니다.');
     } catch (e) {
       alert('URL 생성에 실패했습니다.');
