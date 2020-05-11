@@ -1,3 +1,5 @@
+import firebase from '../firebase';
+
 const places = new kakao.maps.services.Places();
 
 function getRefinedList(result) {
@@ -78,4 +80,11 @@ export async function getNearRestaurantList(latitude, longitude, keyword='') {
         }
     });
     return restList;
+}
+
+export async function getShortenURL(url) {
+    const shortenUrl = firebase.functions().httpsCallable('shortenURL');
+    const newUrl = await shortenUrl({originalUrl: url});
+    console.log(newUrl);
+    return newUrl;
 }
