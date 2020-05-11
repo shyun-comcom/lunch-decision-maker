@@ -135,7 +135,7 @@ export default class TournamentPage extends Component {
       });
     }, (error) => {
       this.props.history.push('/error');
-    });
+    }, { maximumAge: 0 });
   }
 
   setRandomInfo = async (latitude, longitude, cate) => {

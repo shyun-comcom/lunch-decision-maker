@@ -59,7 +59,7 @@ export default class RandomPage extends Component {
       this.setRandomInfo(latitude, longitude);
     }, (error) => {
       this.props.history.push('/error');
-    });
+    }, { maximumAge: 0 });
   }
 
   setRandomInfo = async (latitude, longitude) => {
