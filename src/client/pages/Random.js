@@ -75,14 +75,18 @@ export default class RandomPage extends Component {
     this.kakaoMap.current.moveMap(randomRest.y, randomRest.x);
   }
 
-  getShareLink = () => {
+  getShareLink = async () => {
     const { selected } = this.state;
     const item = this.restaurantList[selected];
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
         + `${item.y}/${item.x}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
-    getShortenURL(newURL);
-    copy(encodeURI(newURL));
-    alert('공유 링크가 복사되었습니다.');
+    try {
+      const shortenURL = await getShortenURL(newURL);
+      copy(encodeURI(shortenURL));
+      alert('공유 링크가 복사되었습니다.');
+    } catch (e) {
+      alert('URL 생성에 실패했습니다.');
+    }
   }
 
   render = () => {

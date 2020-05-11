@@ -7,6 +7,8 @@ import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import KakaoMap from '../components/KakaoMap';
 
+import { getShortenURL } from '../utils';
+
 import WinkEmoji from '../assets/wink-emoji.png';
 import CelebrateEmoji from '../assets/celebrate-emoji.png';
 import ScreamEmoji from '../assets/scream-emoji.png';
@@ -237,13 +239,18 @@ export default class TournamentPage extends Component {
     }
   }
 
-  getShareLink = () => {
+  getShareLink = async () => {
     const { selected, selectedIdx } = this.state;
     const item = this.restaurantList[selected[selectedIdx]];
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
         + `${item.y}/${item.x}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
-    copy(encodeURI(newURL));
-    alert('공유 링크가 복사되었습니다.');
+    try {
+      const shortenURL = await getShortenURL(newURL);
+      copy(encodeURI(shortenURL));
+      alert('공유 링크가 복사되었습니다.');
+    } catch (e) {
+      alert('URL 생성에 실패했습니다.');
+    }
   }
 
   moveMapCenter = (index) => {
