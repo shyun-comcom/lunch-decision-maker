@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getNearRestaurantList } from '../utils';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { withStyles } from '@material-ui/core/styles';
 
 import Footer from '../components/Footer';
@@ -42,6 +43,7 @@ export default class RandomPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      copyLoading: false,
       isLoaded: false,
       latitude: 0,
       longitude: 0,
@@ -76,6 +78,7 @@ export default class RandomPage extends Component {
   }
 
   getShareLink = async () => {
+    this.setState({copyLoading: true});
     const { selected } = this.state;
     const item = this.restaurantList[selected];
     var newURL = window.location.protocol + "//" + window.location.host + "/share/" 
@@ -86,6 +89,8 @@ export default class RandomPage extends Component {
       alert('공유 링크가 복사되었습니다.');
     } catch (e) {
       alert('URL 생성에 실패했습니다.');
+    } finally {
+      this.setState({copyLoading: false});
     }
   }
 
@@ -136,10 +141,17 @@ export default class RandomPage extends Component {
               </div>
               <div style={{display: 'flex', flexDirection: 'column',
                   alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
-                <ResultButton className="white-button"
+                <ResultButton className="white-button" disabled={this.state.copyLoading}
                     onClick={() => this.getShareLink()}>
-                  <div style={{paddingRight: '4px'}}>결과 링크 공유하기</div>
-                  <img style={{verticalAlign: 'middle'}} src={ShareLink} />
+                  { this.state.copyLoading ? 
+                    <CircularProgress size={25} color="inherit" />
+                    :
+                    <div style={{display: 'flex', flexDirection: 'row',
+                        alignItems: 'center', justifyContent: 'center'}}>
+                      <div style={{paddingRight: '4px'}}>결과 링크 공유하기</div>
+                      <img style={{verticalAlign: 'middle'}} src={ShareLink} />
+                    </div>
+                  }
                 </ResultButton>
                 <div style={{height: '16px'}} />
                 <ResultButton className='white-button'
