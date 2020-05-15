@@ -68,7 +68,7 @@ class Footer extends Component {
                 </LinkButton>
                 <div style={{height: '16px'}} />
                 <LinkButton className='white-button'
-                    onClick={() => this.props.history.goBack()}>
+                    onClick={() => this.props.history.push("/")}>
                     처음으로 돌아가기
                 </LinkButton>
                 <div style={{height: '80px'}} />
