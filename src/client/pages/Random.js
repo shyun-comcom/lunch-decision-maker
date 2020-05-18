@@ -138,8 +138,12 @@ export default class RandomPage extends Component {
                     style={{cursor: 'pointer'}} />
                 <div style={{width: '8px' }} />
                 <a target="_blank" href={selected.place_url}
-                    style={{width: '24px', height: '24px', cursor: 'pointer'}}>
-                  <img src={UrlLink} width={24} height={24} />
+                    style={{width: '80px', height: '24px', cursor: 'pointer',
+                        display: 'flex', flexDirection: 'row', borderRadius: '24px',
+                        alignItems: 'center', justifyContent: 'center', color: '#929292',
+                        textDecoration: 'none', border: '1px solid #DFDFDF'}}>
+                  <div style={{paddingRight: '4px'}}>카카오맵</div>
+                  <img src={UrlLink} width={10} height={10} />
                 </a>
               </div>
               <div style={{display: 'flex', flexDirection: 'column',
