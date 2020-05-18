@@ -252,6 +252,7 @@ export default class TournamentPage extends Component {
       copy(shortenURL);
       alert('공유 링크가 복사되었습니다.');
     } catch (e) {
+      copy(newURL);
       alert('URL 생성에 실패했습니다.');
     } finally {
       this.setState({copyLoading: false});
@@ -269,8 +270,8 @@ export default class TournamentPage extends Component {
       <div className="app-root-div">
         {this.state.isLoaded ? 
           this.state.isFinished ? 
-            <div style={{paddingTop: '56px'}}>
-              <div style={{padding: '0 40px 0 40px'}}>
+            <div className="app-page-wrapper">
+              <div className="app-main-div">
                 { this.state.noResult ? 
                   <div style={{fontSize: '20px', fontWeight: 'bold', paddingBottom: '32px'}}>
                     <div>주변에 해당하는</div>
@@ -294,7 +295,7 @@ export default class TournamentPage extends Component {
                   </div>
                 }
                 { this.state.noResult ? null :
-                  <div>
+                  <div className="app-main-div">
                     <div style={{display: 'flex', paddingBottom: '32px',
                         justifyContent: 'center', alignItems: 'center'}}>
                       <div style={{width: '248px', height: '182px',
@@ -313,8 +314,10 @@ export default class TournamentPage extends Component {
                     <div style={{height: '32px'}} />
                   </div>
                 }
-                <KakaoMap lat={this.state.latitude} lng={this.state.longitude} 
-                    ref={this.kakaoMap} />
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                  <KakaoMap lat={this.state.latitude} lng={this.state.longitude} 
+                      ref={this.kakaoMap} />
+                </div>
                 <div style={{height: '16px'}} />
                 { this.state.selected.map((val, idx) => {
                   const selected = this.restaurantList[val];
@@ -386,36 +389,38 @@ export default class TournamentPage extends Component {
               <Footer />
             </div>
             :
-            <div style={{padding: '56px 40px 40px 40px'}}>
-              <div style={{fontSize: '20px', fontWeight: 'bold',
-                  paddingBottom: '40px', display: 'flex', flexDirection: 'row',
-                  justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                <div style={{display: 'flex', flexDirection: 'column'}}>
-                  <div>메뉴 월드컵!</div>
-                  <div style={{display: 'flex', flexDirection: 'row',
-                      alignItems: 'center', height: 24, lineHeight: 24}}>
-                    오늘의 취향은?
-                    <img src={WinkEmoji} width={24} height={24} 
-                        style={{paddingLeft: 7}} />
+            <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+              <div className="app-main-div">
+                <div style={{display: 'flex', flexDirection: 'column',
+                    alignItems: 'center'}}>
+                  <div style={{fontSize: '20px', fontWeight: 'bold', width: '280px',
+                      paddingBottom: '40px', display: 'flex', flexDirection: 'row',
+                      justifyContent: 'space-between', alignItems: 'flex-end'}}>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                      <div>메뉴 월드컵!</div>
+                      <div style={{display: 'flex', flexDirection: 'row',
+                          alignItems: 'center', height: 24, lineHeight: 24}}>
+                        오늘의 취향은?
+                        <img src={WinkEmoji} width={24} height={24} 
+                            style={{paddingLeft: 7}} />
+                      </div>
+                      <div style={{height: 8}} />
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                      <div style={{fontSize: '14px', fontWeight: 'bold', color: '#929292'}}>
+                        {this.getRoundString()}
+                      </div>
+                      <div style={{height: 8}} />
+                      <div style={{height: 40, padding: '0 22px', background: '#EAEAEA',
+                          lineHeight: 40, borderRadius: 24, display: 'flex',
+                          justifyContent: 'center', alignItems: 'center',
+                          fontSize: '16px', fontWeight: 'bold', color: '#929292'}}>
+                        {this.getProgressString()}
+                      </div>
+                    </div>
                   </div>
-                  <div style={{height: 8}} />
+                  { this.renderCard(this.state.comp) }
                 </div>
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                  <div style={{fontSize: '14px', fontWeight: 'bold', color: '#929292'}}>
-                    {this.getRoundString()}
-                  </div>
-                  <div style={{height: 8}} />
-                  <div style={{height: 40, padding: '0 22px', background: '#EAEAEA',
-                      lineHeight: 40, borderRadius: 24, display: 'flex',
-                      justifyContent: 'center', alignItems: 'center',
-                      fontSize: '16px', fontWeight: 'bold', color: '#929292'}}>
-                    {this.getProgressString()}
-                  </div>
-                </div>
-              </div>
-              <div style={{display: 'flex', flexDirection: 'column',
-                  alignItems: 'center'}}>
-                { this.renderCard(this.state.comp) }
               </div>
             </div>
           : <Loading />

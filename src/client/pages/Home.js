@@ -12,7 +12,8 @@ export default class HomePage extends Component {
 
   render = () => {
     return (
-      <div className="app-root-div" style={{padding: '60px 40px 60px 40px'}}>
+      <div className="app-root-div">
+        <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
         <div className="home-item-box" id="random">
             <div className="home-item-desc">
               <div>둘 중 하나 고르기도 REAL 스트레스?!</div>
@@ -51,6 +52,7 @@ export default class HomePage extends Component {
                 <img src={WhiteArrow} />
               </div>
             </div>
+        </div>
         </div>
       </div>
     )

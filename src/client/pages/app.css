@@ -1,5 +1,6 @@
 html { 
   height: 100%;
+  margin: 0;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
@@ -10,15 +11,14 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   overflow: hidden;
   background: #ffffff;
 }
 
 #root {
-  width: 360px;
-  height: 640px;
+  width: 100%;
   display: flex;
+  align-items: center;
   flex-direction: column;
   background: #ffffff;
   overflow-x: hidden;
@@ -33,6 +33,18 @@ body {
   justify-content: center;
   overflow-y: scroll;
   overflow-x: hidden;
+  width: 100%;
+}
+
+.app-page-wrapper {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-main-div {
+  max-width: 360px;
 }
 
 .dark-button {

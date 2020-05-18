@@ -38,8 +38,8 @@ export default class SharePage extends Component {
     const { latitude, longitude, pid, cname, pname, paddress } = this.props.match.params;
     return ( 
       <div className="app-root-div">
-        <div style={{paddingTop: '56px'}}>
-          <div style={{padding: '0 40px 0 40px'}}>
+        <div className="app-page-wrapper">
+          <div className="app-main-div">
             <div style={{paddingBottom: '40px'}}>
               <div style={{display: 'flex', flexDirection: 'row',
                   alignItems: 'center', height: 24, lineHeight: 24}}>
@@ -49,7 +49,9 @@ export default class SharePage extends Component {
               </div>
               <div>오늘의 메뉴와 식당, 어때?</div>
             </div>
-            <KakaoMap lat={Number(latitude)} lng={Number(longitude)} />
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+              <KakaoMap lat={Number(latitude)} lng={Number(longitude)} />
+            </div>
             <div style={{display: 'flex', flexDirection: 'row',
                 alignItems: 'center', paddingTop: '32px'}}>
               <div className='category-tag' style={{backgroundColor: '#D8E3FF'}}>

@@ -88,6 +88,7 @@ export default class RandomPage extends Component {
       copy(shortenURL);
       alert('공유 링크가 복사되었습니다.');
     } catch (e) {
+      copy(newURL);
       alert('URL 생성에 실패했습니다.');
     } finally {
       this.setState({copyLoading: false});
@@ -100,8 +101,8 @@ export default class RandomPage extends Component {
     return ( 
       <div className="app-root-div">
         {this.state.isLoaded ?
-          <div style={{paddingTop: '56px'}}>
-            <div style={{padding: '0 40px 0 40px'}}>
+          <div className="app-page-wrapper">
+            <div className="app-main-div">
               <div style={{paddingBottom: '40px'}}>
                 <div style={{display: 'flex', flexDirection: 'row',
                     alignItems: 'center', height: 24, lineHeight: 24}}>
@@ -111,8 +112,10 @@ export default class RandomPage extends Component {
                 </div>
                 <div>오늘의 메뉴와 식당, 어때?</div>
               </div>
-              <KakaoMap lat={this.state.latitude} lng={this.state.longitude} 
-                  ref={this.kakaoMap} />
+              <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                <KakaoMap lat={this.state.latitude} lng={this.state.longitude} 
+                    ref={this.kakaoMap} />
+              </div>
               <div style={{display: 'flex', flexDirection: 'row',
                   alignItems: 'center', paddingTop: '32px'}}>
                 <div className='category-tag' style={{backgroundColor: '#D8E3FF'}}>
