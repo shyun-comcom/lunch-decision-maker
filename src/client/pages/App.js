@@ -15,8 +15,8 @@ export default class App extends Component {
         return (
             <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
                 <div className='app-root-div'
-                    style={{position: 'relative', width: '280px', padding: '0 40px'}}>
-                    <div>
+                    style={{position: 'relative', width: '320px', padding: '0 60px'}}>
+                    <div style={{padding: '0 10px'}}>
                         <div style={{fontSize: '20px', color: '#3C3C3C', 
                                 fontFamily: 'Noto Sans KR'}}>
                             <div>메뉴 결정부터 식당 추천까지,</div>
@@ -41,17 +41,17 @@ export default class App extends Component {
                         </a>
                     </div>
                     <div className='circle-div' 
-                        style={{top: 393, left: -19, background: '#FFF5D0',
+                        style={{top: 393, left: 18, background: '#FFF5D0',
                                 boxShadow: '0px 2px 16px #FFD43E'}}>
                         <img src={BurgerIcon} style={{width: 60, height: 60}} />
                     </div>
                     <div className='circle-div' 
-                        style={{top: 328, left: 118, background: '#D8E3FF',
+                        style={{top: 328, left: 160, background: '#D8E3FF',
                                 boxShadow: '0px 2px 24px #8CACFF'}}>
                         <img src={DumplingIcon} style={{width: 60, height: 60}} />
                     </div>
                     <div className='circle-div' 
-                        style={{top: 274, left: 260, background: '#FFE3DA',
+                        style={{top: 274, left: 302, background: '#FFE3DA',
                                 boxShadow: '0px 2px 24px rgba(255, 0, 0, 0.31)'}}>
                         <img src={ChickenIcon} style={{width: 60, height: 60}} />
                     </div>
