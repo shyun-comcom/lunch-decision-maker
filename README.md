@@ -1,4 +1,6 @@
-# lunch-decision-maker (Nyam Nyam!) 
+# lunch-decision-maker (Nyam Nyam!)
+
+[![Run on Ainize](https://ainize.ai/static/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=github.com/shyun-comcom/lunch-decision-maker)
 
 ## Reference
 [simple-react-full-stack](https://github.com/crsandeep/simple-react-full-stack)
