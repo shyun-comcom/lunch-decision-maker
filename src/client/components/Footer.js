@@ -60,13 +60,13 @@ class Footer extends Component {
                 </LinkButton>
                 <div style={{height: '16px'}} />
                 <LinkButton className='white-button' target="_blank"
-                    href={"https://link.ainize.ai/3cf5h0M"}>
+                    href={"https://link.ainize.ai/2AHVi6b"}>
                     <div style={{paddingRight: '4px'}}>Ainize 더 알아보기</div>
                     <img style={{verticalAlign: 'middle'}} src={AinizeIcon} />
                 </LinkButton>
                 <div style={{height: '16px'}} />
                 <LinkButton className='white-button' target="_blank"
-                    href={"https://link.ainize.ai/2SBT8uQ"}>
+                    href={"https://link.ainize.ai/3cLAJDN"}>
                     <div style={{paddingRight: '4px'}}>냠냠 프로젝트 보기</div>
                     <img style={{verticalAlign: 'middle'}} src={GithubIcon} />
                 </LinkButton>
@@ -111,7 +111,7 @@ class Footer extends Component {
                     </div>
                 </a>
                 <div style={{height: '40px'}} />
-                <a target="_blank" href="https://link.ainize.ai/3cf5h0M">
+                <a target="_blank" href="https://link.ainize.ai/2AHVi6b">
                     <img src={AinizeLogo} style={{width: 106, height: 35}} />
                 </a>
             </div>
