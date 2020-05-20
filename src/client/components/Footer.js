@@ -11,14 +11,6 @@ import YoutubeIcon from '../assets/youtube-icon.svg';
 import AinizeIcon from '../assets/ainize-icon.svg';
 import GithubIcon from '../assets/github-icon.svg';
 import '../pages/app.css';
-// import analytics from "../analytics";
-// export default function App() {
-//     const onClickAinizeLink = () => {
-//       analytics.event({
-//         category: 'link',
-//         action: 'ainize',
-//       });
-//     }
 
 const LinkButton = withStyles({
   root: {
