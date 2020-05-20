@@ -110,9 +110,9 @@ class Footer extends Component {
                         #deoldify #흑백사진 #컬러복원
                     </div>
                 </a>
-                <div style={{height: '40px'}} />
+                <div style={{height: '60px'}} />
                 <a target="_blank" href="https://link.ainize.ai/2AHVi6b">
-                    <img src={AinizeLogo} style={{width: 106, height: 35}} />
+                    <img src={AinizeLogo} style={{width: 139, height: 15}} />
                 </a>
             </div>
         )
