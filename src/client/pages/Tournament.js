@@ -98,6 +98,7 @@ export default class TournamentPage extends Component {
     this.state = {
       copyLoading: false,
       isLoaded: false,
+      isGenerated: false,
       latitude: 0,
       longitude: 0,
       isFinished: false,
@@ -249,13 +250,11 @@ export default class TournamentPage extends Component {
         + `${item.y}/${item.x}/${item.id}/${item.category_name}/${item.place_name}/${item.road_address_name}`;
     try {
       const shortenURL = await getShortenURL(newURL);
-      copy(shortenURL);
-      alert('공유 링크가 복사되었습니다.');
+      this.copyURL = shortenURL;
+      this.setState({isGenerated: true, copyLoading: false});
     } catch (e) {
-      copy(newURL);
-      alert('URL 생성에 실패했습니다.');
-    } finally {
-      this.setState({copyLoading: false});
+      this.copyURL = newURL;
+      this.setState({isGenerated: true, copyLoading: false});
     }
   }
 
@@ -364,25 +363,44 @@ export default class TournamentPage extends Component {
                 <div style={{height: '36px'}} />
                 <div style={{display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', paddingBottom: 32}}>
-                  <ResultButton className="white-button" disabled={this.state.copyLoading}
-                      onClick={() => this.getShareLink()}>
-                    { this.state.copyLoading ? 
-                        <CircularProgress size={25} color="inherit" />
-                        :
+                  { this.state.isGenerated ?
+                    <ResultButton className="white-button" disabled={!this.state.isGenerated}
+                        onClick={() => {
+                          copy(this.copyURL);
+                          alert('공유 링크가 복사되었습니다.');
+                        }}>
                       <div style={{display: 'flex', flexDirection: 'row',
                           alignItems: 'center', justifyContent: 'center'}}>
-                        <div style={{paddingRight: '4px'}}>결과 링크 공유하기</div>
+                        <div style={{paddingRight: '4px'}}>공유 링크 복사하기</div>
                         <img style={{verticalAlign: 'middle'}} src={ShareLink} />
                       </div>
-                    }
-                  </ResultButton>
+                    </ResultButton>
+                  :
+                    <ResultButton className="white-button" disabled={this.state.copyLoading}
+                        onClick={() => this.getShareLink()}>
+                      { this.state.copyLoading ? 
+                          <div style={{display: 'flex', flexDirection: 'row',
+                              alignItems: 'center', justifyContent: 'center'}}>
+                            <div style={{paddingRight: '4px'}}>링크 생성 중...</div>
+                            <CircularProgress size={16} thickness={7} color="inherit" />
+                          </div>
+                          :
+                        <div style={{display: 'flex', flexDirection: 'row',
+                            alignItems: 'center', justifyContent: 'center'}}>
+                          <div>결과 링크 공유하기</div>
+                        </div>
+                      }
+                    </ResultButton>
+                  }
                   <div style={{height: '16px'}} />
                   <ResultButton className='white-button'
+                      disabled={this.state.copyLoading}
                       onClick={() => {
                         this.getShuffledMatch();
-                        this.setState({comp: 0, isFinished: false, winnerCate: 0});
+                        this.setState({comp: 0, isFinished: false, winnerCate: 0,
+                            isGenerated: false, copyLoading: false});
                       }}>
-                      <div style={{paddingRight: '4px'}}>다시 하기</div>
+                      <div style={{paddingRight: '4px'}}>월드컵 다시 하기</div>
                       <img src={RandomRetry} width={16} height={16} 
                           style={{verticalAlign: 'middle'}} />
                   </ResultButton>
