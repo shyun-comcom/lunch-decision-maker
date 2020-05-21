@@ -112,7 +112,7 @@ class Footer extends Component {
                 </a>
                 <div style={{height: '60px'}} />
                 <a target="_blank" href="https://link.ainize.ai/2AHVi6b">
-                    <img src={AinizeLogo} style={{width: 139, height: 15}} />
+                    <img src={AinizeLogo} style={{width: 136, height: 20}} />
                 </a>
             </div>
         )
