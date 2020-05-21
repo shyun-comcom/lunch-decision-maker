@@ -59,7 +59,14 @@ class Footer extends Component {
                     <img style={{verticalAlign: 'middle'}} src={YoutubeIcon} />
                 </LinkButton>
                 <div style={{height: '16px'}} />
-                <LinkButton className='white-button' target="_blank"
+                <LinkButton className='white-button' target="_blank" 
+                        onClick={() => {
+                            window.gtag('event', 'ainize_more_click', {
+                                'event_category': "spotainize_common",
+                                'non_interaction': false,
+                            });
+                        }
+                    }
                     href={"https://link.ainize.ai/2AHVi6b"}>
                     <div style={{paddingRight: '4px'}}>Ainize 더 알아보기</div>
                     <img style={{verticalAlign: 'middle'}} src={AinizeIcon} />
@@ -111,8 +118,16 @@ class Footer extends Component {
                     </div>
                 </a>
                 <div style={{height: '60px'}} />
-                <a target="_blank" href="https://link.ainize.ai/2AHVi6b">
+                <a target="_blank" 
+                   onClick={() => {
+                        window.gtag('event', 'poweredby_click', {
+                            'event_category': "spotainize_common",
+                            'non_interaction': false,
+                        });
+                    }}
+                    href="https://link.ainize.ai/2AHVi6b">
                     <img src={AinizeLogo} style={{width: 136, height: 20}} />
+
                 </a>
             </div>
         )
