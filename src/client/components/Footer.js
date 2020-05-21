@@ -126,7 +126,8 @@ class Footer extends Component {
                         });
                     }}
                     href="https://link.ainize.ai/2AHVi6b">
-                    <img src={AinizeLogo} style={{width: 139, height: 15}} />
+                    <img src={AinizeLogo} style={{width: 136, height: 20}} />
+
                 </a>
             </div>
         )
